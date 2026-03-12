@@ -28,9 +28,9 @@ const HeroSection = ({ onStartClick }: HeroSectionProps) => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background orbs */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-secondary/20 blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl animate-float" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-secondary/5 blur-3xl animate-pulse-soft" />
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-primary/10 blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-secondary/10 blur-3xl animate-float" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/5 blur-3xl animate-pulse-soft" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
@@ -39,14 +39,14 @@ const HeroSection = ({ onStartClick }: HeroSectionProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 glass-neon rounded-full px-4 py-2 mb-8">
+          <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8">
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-xs font-medium text-muted-foreground">AI Agent Platformasi</span>
           </div>
 
           <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tight mb-6">
             <span className="text-foreground">O'z </span>
-            <span className="gradient-text neon-glow">AI Agentingizni</span>
+            <span className="gradient-text">AI Agentingizni</span>
             <br />
             <span className="text-foreground">yarating</span>
           </h1>
@@ -68,7 +68,7 @@ const HeroSection = ({ onStartClick }: HeroSectionProps) => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               onClick={onStartClick}
               className="gradient-btn px-8 py-4 rounded-2xl text-base font-semibold inline-flex items-center justify-center gap-2"
@@ -78,9 +78,9 @@ const HeroSection = ({ onStartClick }: HeroSectionProps) => {
               <ArrowRight className="w-4 h-4" />
             </motion.button>
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="glass-neon px-8 py-4 rounded-2xl text-base font-semibold text-foreground inline-flex items-center justify-center gap-2 transition-all duration-300"
+              className="glass glass-hover px-8 py-4 rounded-2xl text-base font-semibold text-foreground inline-flex items-center justify-center gap-2"
             >
               Marketplace ko'rish
             </motion.button>
