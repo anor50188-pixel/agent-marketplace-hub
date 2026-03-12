@@ -50,27 +50,6 @@ const DashboardContent = ({ activeSection }: DashboardContentProps) => {
       </div>
 
       <div className="flex-1 p-6 overflow-auto">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.3 }}
-            className="h-full flex items-center justify-center"
-          >
-            <div className="glass rounded-2xl p-12 text-center max-w-md">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Icon className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="font-display text-lg font-semibold text-foreground mb-2">{section.title}</h3>
-              <p className="text-sm text-muted-foreground">{section.description}</p>
-              <button className="gradient-btn mt-6 px-6 py-2.5 rounded-xl text-sm font-medium">
-                Boshlash
-              </button>
-            </div>
-          </motion.div>
-        </AnimatePresence>
       </div>
     </div>
   );
