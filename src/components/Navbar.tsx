@@ -9,7 +9,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-xl gradient-btn flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl gradient-btn flex items-center justify-center shadow-[0_0_20px_hsl(185_80%_55%/0.3)]">
             <Bot className="w-5 h-5" />
           </div>
           <span className="font-display text-xl font-bold tracking-tight text-foreground">
@@ -18,13 +18,13 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-8">
-          <a href="#templates" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <a href="#templates" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
             Shablonlar
           </a>
-          <a href="#marketplace" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <a href="#marketplace" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
             Marketplace
           </a>
-          <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
             Imkoniyatlar
           </a>
           <button className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold">
