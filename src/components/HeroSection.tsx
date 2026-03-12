@@ -10,7 +10,11 @@ const phrases = [
   "Nima yaratamiz bugun?",
 ];
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onStartClick?: () => void;
+}
+
+const HeroSection = ({ onStartClick }: HeroSectionProps) => {
   const [currentPhrase, setCurrentPhrase] = useState(0);
 
   useEffect(() => {
