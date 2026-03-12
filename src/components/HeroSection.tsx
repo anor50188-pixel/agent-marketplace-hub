@@ -70,6 +70,7 @@ const HeroSection = ({ onStartClick }: HeroSectionProps) => {
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              onClick={onStartClick}
               className="gradient-btn px-8 py-4 rounded-2xl text-base font-semibold inline-flex items-center justify-center gap-2"
             >
               <Sparkles className="w-5 h-5" />
