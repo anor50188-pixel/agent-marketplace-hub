@@ -43,8 +43,8 @@ const DashboardContent = ({ activeSection }: DashboardContentProps) => {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
           >
-            <h2 className="font-display text-xl font-semibold text-foreground">{section.title}</h2>
-            <p className="text-sm text-muted-foreground mt-1">{section.description}</p>
+            <h2 className="font-display text-[60px] leading-none font-bold text-foreground neon-glow">{section.title}</h2>
+            <p className="text-sm text-muted-foreground mt-2">{section.description}</p>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -59,15 +59,19 @@ const DashboardContent = ({ activeSection }: DashboardContentProps) => {
             transition={{ duration: 0.3 }}
             className="h-full flex items-center justify-center"
           >
-            <div className="glass rounded-2xl p-12 text-center max-w-md">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <div className="glass-neon rounded-2xl p-12 text-center max-w-md">
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 shadow-[0_0_25px_hsl(185_80%_55%/0.25)]">
                 <Icon className="w-8 h-8 text-primary" />
               </div>
               <h3 className="font-display text-lg font-semibold text-foreground mb-2">{section.title}</h3>
               <p className="text-sm text-muted-foreground">{section.description}</p>
-              <button className="gradient-btn mt-6 px-6 py-2.5 rounded-xl text-sm font-medium">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="gradient-btn mt-6 px-6 py-2.5 rounded-xl text-sm font-medium"
+              >
                 Boshlash
-              </button>
+              </motion.button>
             </div>
           </motion.div>
         </AnimatePresence>

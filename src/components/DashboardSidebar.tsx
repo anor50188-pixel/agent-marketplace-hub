@@ -24,7 +24,7 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
     >
       <div className="p-4 flex items-center justify-between border-b border-border/30">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-primary/20 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-xl bg-primary/20 flex items-center justify-center shadow-[0_0_15px_hsl(185_80%_55%/0.3)]">
             <Bot className="w-4 h-4 text-primary" />
           </div>
           <span className="font-display font-semibold text-foreground">Agentus</span>
@@ -47,7 +47,7 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
             onClick={() => onSectionChange(item.id)}
             className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
               activeSection === item.id
-                ? "bg-primary/15 text-primary"
+                ? "bg-primary/15 text-primary neon-border-active"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             }`}
           >
@@ -58,7 +58,7 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
       </nav>
 
       <div className="p-3 border-t border-border/30">
-        <div className="glass rounded-xl p-3">
+        <div className="glass-neon rounded-xl p-3">
           <p className="text-xs text-muted-foreground">
             AI agentlar bilan ishlang va o'z biznesingizni avtomatlashtiring.
           </p>
