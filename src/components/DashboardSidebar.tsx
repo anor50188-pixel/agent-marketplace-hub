@@ -1,11 +1,37 @@
 import { motion } from "framer-motion";
-import { Bot, Users, ShoppingBag, LayoutGrid, Plus, X } from "lucide-react";
+import { Bot, Users, ShoppingBag, LayoutGrid, Plus, X, Settings, MessageSquare, Zap, FileText, BarChart3, Globe } from "lucide-react";
 
-const menuItems = [
-  { id: "create", label: "Agent yaratish", icon: Plus },
-  { id: "my-agents", label: "Agentlarim", icon: Bot },
-  { id: "marketplace", label: "Sotuvdagi agentlar", icon: ShoppingBag },
-  { id: "apps", label: "Ilovalar", icon: LayoutGrid },
+const menuGroups = [
+  {
+    label: "Asosiy",
+    items: [
+      { id: "create", label: "Agent yaratish", icon: Plus },
+      { id: "my-agents", label: "Agentlarim", icon: Bot },
+      { id: "marketplace", label: "Sotuvdagi agentlar", icon: ShoppingBag },
+    ],
+  },
+  {
+    label: "Vositalar",
+    items: [
+      { id: "apps", label: "Ilovalar", icon: LayoutGrid },
+      { id: "templates", label: "Shablonlar", icon: FileText },
+      { id: "integrations", label: "Integratsiyalar", icon: Zap },
+    ],
+  },
+  {
+    label: "Tahlil",
+    items: [
+      { id: "analytics", label: "Statistika", icon: BarChart3 },
+      { id: "conversations", label: "Suhbatlar", icon: MessageSquare },
+    ],
+  },
+  {
+    label: "Sozlamalar",
+    items: [
+      { id: "settings", label: "Sozlamalar", icon: Settings },
+      { id: "domains", label: "Domenlar", icon: Globe },
+    ],
+  },
 ];
 
 interface DashboardSidebarProps {
@@ -37,23 +63,37 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
         </button>
       </div>
 
-      <nav className="flex-1 p-3 space-y-1">
-        {menuItems.map((item, i) => (
-          <motion.button
-            key={item.id}
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.3 + i * 0.08 }}
-            onClick={() => onSectionChange(item.id)}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-              activeSection === item.id
-                ? "bg-primary/15 text-primary"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-            }`}
-          >
-            <item.icon className="w-4 h-4" />
-            {item.label}
-          </motion.button>
+      <nav className="flex-1 p-3 space-y-4 overflow-auto">
+        {menuGroups.map((group, gi) => (
+          <div key={group.label}>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 + gi * 0.1 }}
+              className="px-3 mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60"
+            >
+              {group.label}
+            </motion.p>
+            <div className="space-y-0.5">
+              {group.items.map((item, i) => (
+                <motion.button
+                  key={item.id}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.35 + gi * 0.1 + i * 0.05 }}
+                  onClick={() => onSectionChange(item.id)}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
+                    activeSection === item.id
+                      ? "bg-primary/15 text-primary"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  <item.icon className="w-4 h-4" />
+                  {item.label}
+                </motion.button>
+              ))}
+            </div>
+          </div>
         ))}
       </nav>
 
