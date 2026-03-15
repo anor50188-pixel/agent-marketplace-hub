@@ -9,11 +9,11 @@ interface ExplorerPanelProps {
 }
 
 const nodes: { id: ActiveNode; label: string; icon: React.ElementType }[] = [
-  { id: "info", label: "Agent Info", icon: FileText },
-  { id: "knowledge", label: "Knowledge Base", icon: Database },
-  { id: "tools", label: "Tools", icon: Wrench },
-  { id: "model", label: "Model Settings", icon: Settings },
-  { id: "output", label: "Output", icon: Monitor },
+  { id: "info", label: "Agent ma'lumotlari", icon: FileText },
+  { id: "knowledge", label: "Bilimlar bazasi", icon: Database },
+  { id: "tools", label: "Toollar", icon: Wrench },
+  { id: "model", label: "Model sozlamalari", icon: Settings },
+  { id: "output", label: "Chiqish kanallari", icon: Monitor },
 ];
 
 const ExplorerPanel = ({ activeNode, onNodeSelect, selectedToolCount }: ExplorerPanelProps) => {
