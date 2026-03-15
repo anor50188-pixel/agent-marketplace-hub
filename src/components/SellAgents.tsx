@@ -6,7 +6,9 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { agentStore, type AgentConfig } from "@/lib/agentStore";
+import { subscriptionStore } from "@/lib/subscriptionStore";
 import { toast } from "@/hooks/use-toast";
+import UpgradePrompt from "./UpgradePrompt";
 
 const MIN_PRICE = 5;
 const COMMISSION = 0.2;
