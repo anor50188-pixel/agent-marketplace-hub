@@ -8,26 +8,16 @@ import {
   Check,
   Search,
   Globe,
-  AlignLeft,
   Code,
   Twitter,
   BarChart3,
   ChevronRight,
   Loader2,
   Bot,
-  Send,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
 
 const steps = [
   { id: 1, label: "Agent ma'lumotlari", icon: FileText },
