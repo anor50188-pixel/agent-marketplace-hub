@@ -12,13 +12,13 @@ interface Tool {
 }
 
 const tools: Tool[] = [
-  { id: "web-search", label: "Web Search", description: "Serper API — Internet research", icon: Search, brandColor: "#3b82f6", glowColor: "59,130,246", url: "https://serper.dev" },
-  { id: "website-reader", label: "Website Reader", description: "Firecrawl — Page analysis", icon: Globe, brandColor: "#f97316", glowColor: "249,115,22", url: "https://www.firecrawl.dev" },
-  { id: "code-execution", label: "Code Execution", description: "E2B — Run & automate code", icon: Code, brandColor: "#10b981", glowColor: "16,185,129", url: "https://e2b.dev" },
-  { id: "social-search", label: "Social Search", description: "X API — Trend analysis", icon: Twitter, brandColor: "#ffffff", glowColor: "255,255,255", url: "https://developer.x.com" },
-  { id: "file-analysis", label: "File Analysis", description: "CSV, PDF, Excel parsing", icon: FileText, brandColor: "#8b5cf6", glowColor: "139,92,246" },
-  { id: "dashboard-builder", label: "Dashboard Builder", description: "Visual result dashboards", icon: BarChart3, brandColor: "#06b6d4", glowColor: "6,182,212" },
-  { id: "ai-brain", label: "AI Brain", description: "MiniMax — Agent intelligence", icon: Bot, brandColor: "#a855f7", glowColor: "168,85,247", url: "https://www.minimaxi.com" },
+  { id: "web-search", label: "Web Qidiruv", description: "Serper API — Internetdan ma'lumot topish", icon: Search, brandColor: "#3b82f6", glowColor: "59,130,246", url: "https://serper.dev" },
+  { id: "website-reader", label: "Sayt O'quvchi", description: "Firecrawl — Web sahifani tahlil qilish", icon: Globe, brandColor: "#f97316", glowColor: "249,115,22", url: "https://www.firecrawl.dev" },
+  { id: "code-execution", label: "Kod Ishlatish", description: "E2B — Kod yozish va avtomatlashtirish", icon: Code, brandColor: "#10b981", glowColor: "16,185,129", url: "https://e2b.dev" },
+  { id: "social-search", label: "Ijtimoiy Qidiruv", description: "X API — Trend tahlili", icon: Twitter, brandColor: "#ffffff", glowColor: "255,255,255", url: "https://developer.x.com" },
+  { id: "file-analysis", label: "Fayl Tahlili", description: "CSV, PDF, Excel tahlil qilish", icon: FileText, brandColor: "#8b5cf6", glowColor: "139,92,246" },
+  { id: "dashboard-builder", label: "Dashboard Yaratuvchi", description: "Vizual natija panellari", icon: BarChart3, brandColor: "#06b6d4", glowColor: "6,182,212" },
+  { id: "ai-brain", label: "AI Miya", description: "MiniMax — Agent aql-zakovati", icon: Bot, brandColor: "#a855f7", glowColor: "168,85,247", url: "https://www.minimaxi.com" },
 ];
 
 interface ToolPowerCardsProps {
