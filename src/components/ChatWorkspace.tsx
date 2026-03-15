@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Bot, User, X, Lock, Sparkles } from "lucide-react";
-import { Button } from "./ui/button";
+import { Send, Bot, User, X, Sparkles, Plus, MonitorSmartphone, Mic, ArrowUp } from "lucide-react";
 import ToolDock from "./ToolDock";
 import { toast } from "@/hooks/use-toast";
 
@@ -10,15 +9,6 @@ interface Message {
   role: "user" | "assistant";
   content: string;
 }
-
-const initialMessages: Message[] = [
-  {
-    id: "1",
-    role: "assistant",
-    content:
-      "Salom! 👋 Men sizning AI agentingizman. Qanday vazifa bajarishimni xohlaysiz? Masalan: \"Har kuni tech trendlarni izla\" deb yozing.",
-  },
-];
 
 const aiResponses = [
   "Tushundim! Qaysi tool'larni ishlatishimni xohlaysiz? Pastdagi dock'dan kerakli tool'larni faollashtiring.",
@@ -30,7 +20,7 @@ const aiResponses = [
 
 // Simulated API key registry
 const registeredKeys: Record<string, boolean> = {
-  "ai-brain": true, // Always available
+  "ai-brain": true,
 };
 
 export interface ToolInfo {
@@ -53,7 +43,7 @@ export const workspaceTools: ToolInfo[] = [
 ];
 
 const ChatWorkspace = () => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [responseIndex, setResponseIndex] = useState(0);
@@ -61,13 +51,13 @@ const ChatWorkspace = () => {
   const [apiKeys] = useState<Record<string, boolean>>(registeredKeys);
   const bottomRef = useRef<HTMLDivElement>(null);
 
+  const hasMessages = messages.length > 0;
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  const isToolUnlocked = (toolId: string) => {
-    return !!apiKeys[toolId];
-  };
+  const isToolUnlocked = (toolId: string) => !!apiKeys[toolId];
 
   const handleToolClick = (toolId: string) => {
     if (!isToolUnlocked(toolId)) {
@@ -78,11 +68,8 @@ const ChatWorkspace = () => {
       });
       return;
     }
-
     setActiveTools((prev) =>
-      prev.includes(toolId)
-        ? prev.filter((t) => t !== toolId)
-        : [...prev, toolId]
+      prev.includes(toolId) ? prev.filter((t) => t !== toolId) : [...prev, toolId]
     );
   };
 
@@ -111,12 +98,92 @@ const ChatWorkspace = () => {
   };
 
   const removeActiveTool = (toolId: string) => {
-    if (toolId === "ai-brain") return; // Can't remove brain
+    if (toolId === "ai-brain") return;
     setActiveTools((prev) => prev.filter((t) => t !== toolId));
   };
 
+  // Landing state — no messages yet (like Lovable dashboard)
+  if (!hasMessages) {
+    return (
+      <div className="flex-1 flex flex-col min-h-0 relative bg-background">
+        {/* Centered content */}
+        <div className="flex-1 flex flex-col items-center justify-center px-6">
+          {/* Gradient glow behind heading */}
+          <div className="relative mb-8">
+            <div className="absolute inset-0 blur-[80px] opacity-30 bg-gradient-to-r from-primary via-secondary to-accent rounded-full scale-150" />
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="relative font-display text-3xl md:text-4xl font-bold text-foreground text-center"
+            >
+              Agentingizni yarating
+            </motion.h1>
+          </div>
+
+          {/* Main input card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="w-full max-w-2xl"
+          >
+            <div className="workspace-prompt-card rounded-2xl border border-border/40 bg-card/60 backdrop-blur-xl shadow-lg overflow-hidden">
+              <div className="p-4">
+                <textarea
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      sendMessage();
+                    }
+                  }}
+                  placeholder="Agent uchun vazifa yozing..."
+                  rows={3}
+                  className="w-full bg-transparent text-foreground placeholder:text-muted-foreground text-base resize-none focus:outline-none"
+                />
+              </div>
+              <div className="flex items-center justify-between px-4 pb-3">
+                <div className="flex items-center gap-1">
+                  <button className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors">
+                    <Plus className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="flex items-center gap-1">
+                  <button className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors">
+                    <MonitorSmartphone className="w-4 h-4" />
+                  </button>
+                  <button className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors">
+                    <Mic className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={sendMessage}
+                    disabled={!input.trim()}
+                    className="w-8 h-8 rounded-full flex items-center justify-center bg-foreground text-background disabled:opacity-30 transition-all hover:opacity-80"
+                  >
+                    <ArrowUp className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Bottom Tool Dock */}
+        <ToolDock
+          tools={workspaceTools}
+          activeTools={activeTools}
+          onToolClick={handleToolClick}
+          isToolUnlocked={isToolUnlocked}
+        />
+      </div>
+    );
+  }
+
+  // Chat state — messages exist
   return (
-    <div className="flex-1 flex flex-col min-h-0 relative bg-[hsl(220_25%_4%)]">
+    <div className="flex-1 flex flex-col min-h-0 relative bg-background">
       {/* Active Tools Bar */}
       <AnimatePresence>
         {activeTools.length > 0 && (
@@ -185,9 +252,7 @@ const ChatWorkspace = () => {
                 </div>
                 <div
                   className={`max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                    msg.role === "assistant"
-                      ? "chat-bubble-ai"
-                      : "chat-bubble-user"
+                    msg.role === "assistant" ? "chat-bubble-ai" : "chat-bubble-user"
                   }`}
                 >
                   {msg.content}
@@ -197,11 +262,7 @@ const ChatWorkspace = () => {
           </AnimatePresence>
 
           {isTyping && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex gap-3"
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-3">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-[0_0_15px_hsl(var(--primary)/0.3)]">
                 <Bot className="w-4 h-4 text-primary-foreground" />
               </div>
@@ -225,10 +286,9 @@ const ChatWorkspace = () => {
 
       {/* Input + Dock */}
       <div className="relative">
-        {/* Chat Input */}
         <div className="px-6 pb-3">
           <div className="max-w-3xl mx-auto">
-            <div className="chat-input-container flex items-center gap-2 p-2 rounded-2xl">
+            <div className="workspace-prompt-card flex items-center gap-2 p-2 rounded-2xl border border-border/40 bg-card/60 backdrop-blur-xl">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -236,19 +296,17 @@ const ChatWorkspace = () => {
                 placeholder="Agent'ga vazifa bering..."
                 className="flex-1 h-10 bg-transparent px-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
               />
-              <Button
+              <button
                 onClick={sendMessage}
                 disabled={!input.trim() || isTyping}
-                size="icon"
-                className="h-10 w-10 rounded-xl gradient-btn border-0 shrink-0 shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
+                className="w-8 h-8 rounded-full flex items-center justify-center bg-foreground text-background disabled:opacity-30 transition-all hover:opacity-80 shrink-0"
               >
-                <Send className="w-4 h-4" />
-              </Button>
+                <ArrowUp className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Tool Dock */}
         <ToolDock
           tools={workspaceTools}
           activeTools={activeTools}
