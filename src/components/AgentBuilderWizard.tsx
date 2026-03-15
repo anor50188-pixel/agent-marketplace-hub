@@ -46,12 +46,13 @@ interface Tool {
 }
 
 const tools: Tool[] = [
-  { id: "web-search", label: "Web Search", description: "Internetdan ma'lumot qidirish", icon: Search, group: "basic" },
-  { id: "website-reader", label: "Website Reader", description: "Veb sahifalarni o'qish va tahlil qilish", icon: Globe, group: "basic" },
-  { id: "text-summarizer", label: "Text Summarizer", description: "Matnlarni qisqartirish", icon: AlignLeft, group: "basic" },
-  { id: "code-execution", label: "Code Execution", description: "Kod yozish va ishga tushirish", icon: Code, group: "advanced" },
-  { id: "social-search", label: "Social Media Search", description: "Ijtimoiy tarmoqlardan qidirish", icon: Twitter, group: "advanced" },
-  { id: "dashboard-builder", label: "Dashboard Builder", description: "Vizual dashboard yaratish", icon: BarChart3, group: "advanced" },
+  { id: "web-search", label: "Web Search (Serper)", description: "Internetdan ma'lumot topish va research qilish", icon: Search, group: "basic" },
+  { id: "website-reader", label: "Website Reader (Firecrawl)", description: "Web sahifani o'qish, tahlil qilish", icon: Globe, group: "basic" },
+  { id: "code-execution", label: "Code Execution (E2B)", description: "Kod yozish, data analysis, automation", icon: Code, group: "basic" },
+  { id: "social-search", label: "Social Media Search (X API)", description: "Trend analysis, audience research", icon: Twitter, group: "basic" },
+  { id: "file-analysis", label: "File / Data Analysis", description: "CSV, PDF, Excel tahlil qilish", icon: FileText, group: "advanced" },
+  { id: "dashboard-builder", label: "Dashboard Builder", description: "Agent natijalarini vizual dashboardda ko'rsatish", icon: BarChart3, group: "advanced" },
+  { id: "ai-brain", label: "AI Brain (MiniMax)", description: "Agentni boshqaruvchi AI model", icon: Bot, group: "advanced" },
 ];
 
 const AgentBuilderWizard = () => {
