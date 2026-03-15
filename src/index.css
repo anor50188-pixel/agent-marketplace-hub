@@ -167,23 +167,29 @@
     box-shadow: 0 0 20px hsl(var(--primary) / 0.1);
   }
 
-  /* Tool Dock */
-  .tool-dock {
-    background: hsl(var(--card) / 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid hsl(var(--border) / 0.3);
-    box-shadow: 0 8px 32px hsl(0 0% 0% / 0.3);
+  /* Top Toolbar */
+  .top-toolbar {
+    background: hsl(var(--card) / 0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
-  .tool-dock-item-active {
-    background: hsl(var(--primary) / 0.15);
+  .toolbar-chip {
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .toolbar-chip-active {
     border: 1px solid hsl(var(--primary) / 0.3);
   }
 
-  .tool-dock-item-locked {
+  .toolbar-chip-idle {
+    border: 1px solid transparent;
+  }
+
+  .toolbar-chip-locked {
     cursor: not-allowed;
-    opacity: 0.5;
+    opacity: 0.45;
   }
 
   .active-tool-badge {
