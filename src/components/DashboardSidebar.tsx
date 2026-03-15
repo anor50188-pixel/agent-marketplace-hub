@@ -14,7 +14,6 @@ const menuGroups = [
     items: [
       { id: "apps", label: "Ilovalar", icon: LayoutGrid },
       { id: "templates", label: "Shablonlar", icon: FileText },
-      { id: "integrations", label: "Integratsiyalar", icon: Zap },
     ],
   },
   {
