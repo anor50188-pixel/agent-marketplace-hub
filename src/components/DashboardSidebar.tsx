@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown } from "lucide-react";
+import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown, Store } from "lucide-react";
 
 const menuGroups = [
   {
@@ -7,6 +7,7 @@ const menuGroups = [
     items: [
       { id: "create", label: "Agent yaratish", icon: Plus },
       { id: "my-agents", label: "Agentlarim", icon: Bot },
+      { id: "sell", label: "Agent sotish", icon: Store },
     ],
   },
   {
