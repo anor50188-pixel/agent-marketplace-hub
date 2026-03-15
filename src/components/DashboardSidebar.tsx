@@ -2,30 +2,31 @@ import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown, Store, Crown } from "lucide-react";
 import { subscriptionStore, PLANS } from "@/lib/subscriptionStore";
+import { i18nStore } from "@/lib/i18nStore";
 
 const menuGroups = [
   {
-    label: "",
+    labelKey: "",
     items: [
-      { id: "create", label: "Agent yaratish", icon: Plus },
-      { id: "my-agents", label: "Agentlarim", icon: Bot },
-      { id: "sell", label: "Agent sotish", icon: Store },
+      { id: "create", labelKey: "sidebar.create", icon: Plus },
+      { id: "my-agents", labelKey: "sidebar.myAgents", icon: Bot },
+      { id: "sell", labelKey: "sidebar.sell", icon: Store },
     ],
   },
   {
-    label: "Vositalar",
+    labelKey: "sidebar.tools",
     items: [
-      { id: "apps", label: "Ilovalar", icon: LayoutGrid },
-      { id: "templates", label: "Shablonlar", icon: FileText },
+      { id: "apps", labelKey: "sidebar.apps", icon: LayoutGrid },
+      { id: "templates", labelKey: "sidebar.templates", icon: FileText },
     ],
   },
   {
-    label: "Boshqalar",
+    labelKey: "sidebar.others",
     items: [
-      { id: "marketplace", label: "Marketplace", icon: ShoppingBag },
-      { id: "analytics", label: "Statistika", icon: BarChart3 },
-      { id: "subscriptions", label: "Obuna", icon: Crown },
-      { id: "settings", label: "Sozlamalar", icon: Settings },
+      { id: "marketplace", labelKey: "sidebar.marketplace", icon: ShoppingBag },
+      { id: "analytics", labelKey: "sidebar.analytics", icon: BarChart3 },
+      { id: "subscriptions", labelKey: "sidebar.subscriptions", icon: Crown },
+      { id: "settings", labelKey: "sidebar.settings", icon: Settings },
     ],
   },
 ];
