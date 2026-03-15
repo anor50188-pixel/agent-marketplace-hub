@@ -14,18 +14,21 @@ import {
   ChevronRight,
   Loader2,
   Bot,
+  ExternalLink,
+  MessageSquare,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import WizardAIChat from "./wizard/WizardAIChat";
 
 const steps = [
   { id: 1, label: "Agent ma'lumotlari", icon: FileText },
   { id: 2, label: "Tool tanlash", icon: Wrench },
-  { id: 3, label: "Test qilish", icon: Play },
-  { id: 4, label: "Yaratish", icon: Rocket },
+  { id: 3, label: "AI Chat", icon: MessageSquare },
+  { id: 4, label: "Test qilish", icon: Play },
+  { id: 5, label: "Yaratish", icon: Rocket },
 ];
-
 
 interface Tool {
   id: string;
@@ -33,16 +36,17 @@ interface Tool {
   description: string;
   icon: React.ElementType;
   group: "basic" | "advanced";
+  url?: string;
 }
 
 const tools: Tool[] = [
-  { id: "web-search", label: "Web Search (Serper)", description: "Internetdan ma'lumot topish va research qilish", icon: Search, group: "basic" },
-  { id: "website-reader", label: "Website Reader (Firecrawl)", description: "Web sahifani o'qish, tahlil qilish", icon: Globe, group: "basic" },
-  { id: "code-execution", label: "Code Execution (E2B)", description: "Kod yozish, data analysis, automation", icon: Code, group: "basic" },
-  { id: "social-search", label: "Social Media Search (X API)", description: "Trend analysis, audience research", icon: Twitter, group: "basic" },
+  { id: "web-search", label: "Web Search (Serper)", description: "Internetdan ma'lumot topish va research qilish", icon: Search, group: "basic", url: "https://serper.dev" },
+  { id: "website-reader", label: "Website Reader (Firecrawl)", description: "Web sahifani o'qish, tahlil qilish", icon: Globe, group: "basic", url: "https://www.firecrawl.dev" },
+  { id: "code-execution", label: "Code Execution (E2B)", description: "Kod yozish, data analysis, automation", icon: Code, group: "basic", url: "https://e2b.dev" },
+  { id: "social-search", label: "Social Media Search (X API)", description: "Trend analysis, audience research", icon: Twitter, group: "basic", url: "https://developer.x.com" },
   { id: "file-analysis", label: "File / Data Analysis", description: "CSV, PDF, Excel tahlil qilish", icon: FileText, group: "advanced" },
   { id: "dashboard-builder", label: "Dashboard Builder", description: "Agent natijalarini vizual dashboardda ko'rsatish", icon: BarChart3, group: "advanced" },
-  { id: "ai-brain", label: "AI Brain (MiniMax)", description: "Agentni boshqaruvchi AI model", icon: Bot, group: "advanced" },
+  { id: "ai-brain", label: "AI Brain (MiniMax)", description: "Agentni boshqaruvchi AI model", icon: Bot, group: "advanced", url: "https://www.minimaxi.com" },
 ];
 
 const AgentBuilderWizard = () => {
@@ -68,20 +72,21 @@ const AgentBuilderWizard = () => {
     return true;
   };
 
+  const selectedToolLabels = tools.filter((t) => selectedTools.includes(t.id)).map((t) => t.label);
+
   const runTest = () => {
     if (!testInput.trim()) return;
     setTestRunning(true);
     setTestOutput("");
-    const selectedToolNames = tools.filter((t) => selectedTools.includes(t.id)).map((t) => t.label);
     let output = `🤖 Agent: ${agentName}\n📋 Vazifa: ${testInput}\n\n`;
     let i = 0;
     const interval = setInterval(() => {
-      if (i < selectedToolNames.length) {
-        output += `⚙️ ${selectedToolNames[i]} ishga tushirilmoqda...\n`;
+      if (i < selectedToolLabels.length) {
+        output += `⚙️ ${selectedToolLabels[i]} ishga tushirilmoqda...\n`;
         setTestOutput(output);
         i++;
       } else {
-        output += `\n✅ Test muvaffaqiyatli yakunlandi!\n📊 Natija: "${testInput}" bo'yicha ${selectedToolNames.length} ta tool ishlatildi.`;
+        output += `\n✅ Test muvaffaqiyatli yakunlandi!\n📊 Natija: "${testInput}" bo'yicha ${selectedToolLabels.length} ta tool ishlatildi.`;
         setTestOutput(output);
         setTestRunning(false);
         clearInterval(interval);
@@ -95,6 +100,11 @@ const AgentBuilderWizard = () => {
       setCreating(false);
       setCreated(true);
     }, 2000);
+  };
+
+  const openToolSite = (e: React.MouseEvent, url?: string) => {
+    e.stopPropagation();
+    if (url) window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const renderStepContent = () => {
@@ -112,7 +122,6 @@ const AgentBuilderWizard = () => {
               <h2 className="text-2xl font-display font-bold text-foreground mb-1">Agent ma'lumotlari</h2>
               <p className="text-sm text-muted-foreground">Agentingiz haqida asosiy ma'lumotlarni kiriting</p>
             </div>
-
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label className="text-sm font-medium text-foreground">Agent nomi</Label>
@@ -123,7 +132,6 @@ const AgentBuilderWizard = () => {
                   className="h-11 glass border-border/40 focus:border-primary/50"
                 />
               </div>
-
               <div className="space-y-2">
                 <Label className="text-sm font-medium text-foreground">Tavsif</Label>
                 <textarea
@@ -134,7 +142,6 @@ const AgentBuilderWizard = () => {
                   className="w-full rounded-md border border-border/40 bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 glass"
                 />
               </div>
-
             </div>
           </motion.div>
         );
@@ -150,7 +157,7 @@ const AgentBuilderWizard = () => {
           >
             <div>
               <h2 className="text-2xl font-display font-bold text-foreground mb-1">Tool tanlash</h2>
-              <p className="text-sm text-muted-foreground">Agent ishlatadigan vositalarni tanlang</p>
+              <p className="text-sm text-muted-foreground">Toolni tanlang va rasmiy saytida ro'yxatdan o'ting</p>
             </div>
 
             {(["basic", "advanced"] as const).map((group) => (
@@ -183,6 +190,15 @@ const AgentBuilderWizard = () => {
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-foreground">{tool.label}</p>
                             <p className="text-xs text-muted-foreground">{tool.description}</p>
+                            {tool.url && isSelected && (
+                              <button
+                                onClick={(e) => openToolSite(e, tool.url)}
+                                className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-medium text-primary hover:text-primary/80 transition-colors"
+                              >
+                                <ExternalLink className="w-3 h-3" />
+                                Ro'yxatdan o'tish
+                              </button>
+                            )}
                           </div>
                           <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-colors ${
                             isSelected ? "bg-primary border-primary" : "border-border"
@@ -200,8 +216,18 @@ const AgentBuilderWizard = () => {
 
       case 3:
         return (
+          <WizardAIChat
+            agentName={agentName}
+            agentDescription={agentDescription}
+            selectedTools={selectedTools}
+            toolLabels={selectedToolLabels}
+          />
+        );
+
+      case 4:
+        return (
           <motion.div
-            key="step3"
+            key="step4"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
@@ -211,8 +237,6 @@ const AgentBuilderWizard = () => {
               <h2 className="text-2xl font-display font-bold text-foreground mb-1">Agentni test qilish</h2>
               <p className="text-sm text-muted-foreground">Yaratishdan oldin agentni sinab ko'ring</p>
             </div>
-
-            {/* Agent summary */}
             <div className="glass rounded-xl p-4 border border-border/30">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center">
@@ -233,8 +257,6 @@ const AgentBuilderWizard = () => {
                   ))}
               </div>
             </div>
-
-            {/* Test input */}
             <div className="space-y-3">
               <div className="flex gap-2">
                 <Input
@@ -253,8 +275,6 @@ const AgentBuilderWizard = () => {
                   Run Test
                 </Button>
               </div>
-
-              {/* Output */}
               <div className="glass rounded-xl p-4 border border-border/30 min-h-[200px]">
                 <pre className="text-sm text-muted-foreground font-mono whitespace-pre-wrap leading-relaxed">
                   {testOutput || "Test natijasi bu yerda ko'rinadi..."}
@@ -264,10 +284,10 @@ const AgentBuilderWizard = () => {
           </motion.div>
         );
 
-      case 4:
+      case 5:
         return (
           <motion.div
-            key="step4"
+            key="step5"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
@@ -279,8 +299,6 @@ const AgentBuilderWizard = () => {
                   <h2 className="text-2xl font-display font-bold text-foreground mb-1">Agent yaratish</h2>
                   <p className="text-sm text-muted-foreground">Hamma narsa tayyor! Agentni ishga tushiring.</p>
                 </div>
-
-                {/* Final summary */}
                 <div className="glass rounded-2xl p-6 border border-border/30 space-y-4">
                   <div className="flex items-center gap-4">
                     <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
@@ -291,12 +309,10 @@ const AgentBuilderWizard = () => {
                       <p className="text-sm text-muted-foreground">{agentDescription}</p>
                     </div>
                   </div>
-
                   <div className="rounded-xl bg-muted/30 p-3">
                     <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Toollar</p>
                     <p className="text-sm font-medium text-foreground">{selectedTools.length} ta tanlangan</p>
                   </div>
-
                   <div className="flex flex-wrap gap-1.5">
                     {tools
                       .filter((t) => selectedTools.includes(t.id))
@@ -307,7 +323,6 @@ const AgentBuilderWizard = () => {
                       ))}
                   </div>
                 </div>
-
                 <Button
                   onClick={handleCreate}
                   disabled={creating}
@@ -372,9 +387,7 @@ const AgentBuilderWizard = () => {
               <div key={step.id} className="flex items-start gap-3">
                 <div className="flex flex-col items-center">
                   <motion.div
-                    animate={{
-                      scale: isActive ? 1.1 : 1,
-                    }}
+                    animate={{ scale: isActive ? 1.1 : 1 }}
                     className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                       isCompleted
                         ? "bg-primary text-primary-foreground"
@@ -383,11 +396,7 @@ const AgentBuilderWizard = () => {
                         : "bg-muted/50 text-muted-foreground"
                     }`}
                   >
-                    {isCompleted ? (
-                      <Check className="w-4 h-4" />
-                    ) : (
-                      <step.icon className="w-4 h-4" />
-                    )}
+                    {isCompleted ? <Check className="w-4 h-4" /> : <step.icon className="w-4 h-4" />}
                   </motion.div>
                   {index < steps.length - 1 && (
                     <div className={`w-0.5 h-8 my-1 rounded-full transition-colors ${
@@ -416,7 +425,6 @@ const AgentBuilderWizard = () => {
           </AnimatePresence>
         </div>
 
-        {/* Bottom navigation */}
         {!created && (
           <div className="p-6 border-t border-border/30 flex items-center justify-between">
             <Button
@@ -427,9 +435,9 @@ const AgentBuilderWizard = () => {
             >
               Orqaga
             </Button>
-            {currentStep < 4 && (
+            {currentStep < 5 && (
               <Button
-                onClick={() => setCurrentStep((s) => Math.min(4, s + 1))}
+                onClick={() => setCurrentStep((s) => Math.min(5, s + 1))}
                 disabled={!canNext()}
                 className="gradient-btn border-0 gap-1 px-6"
               >
