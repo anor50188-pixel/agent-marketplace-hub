@@ -1,5 +1,7 @@
-import { Bot, Menu } from "lucide-react";
+import { Bot, Menu, LogOut } from "lucide-react";
 import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
