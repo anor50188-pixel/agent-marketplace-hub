@@ -39,7 +39,8 @@ interface DashboardSidebarProps {
 
 const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: DashboardSidebarProps) => {
   const currentPlan = useSyncExternalStore(subscriptionStore.subscribe, subscriptionStore.getPlan);
-  const t = useSyncExternalStore(i18nStore.subscribe, () => i18nStore.t.bind(i18nStore));
+  useSyncExternalStore(i18nStore.subscribe, i18nStore.getSnapshot);
+  const t = i18nStore.t;
   const planConfig = PLANS.find((p) => p.id === currentPlan)!;
 
   return (
