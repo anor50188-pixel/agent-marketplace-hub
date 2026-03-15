@@ -134,10 +134,15 @@ export const translations: Record<Lang, Record<string, string>> = {
 let currentLang: Lang = "uz";
 let langListeners: (() => void)[] = [];
 
+// Stable snapshot for useSyncExternalStore
+let snapshot: { lang: Lang } = { lang: currentLang };
+
 export const i18nStore = {
   getLang: () => currentLang,
+  getSnapshot: () => snapshot,
   setLang: (lang: Lang) => {
     currentLang = lang;
+    snapshot = { lang: currentLang };
     langListeners.forEach((fn) => fn());
   },
   t: (key: string): string => {

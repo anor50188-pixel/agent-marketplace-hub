@@ -26,8 +26,9 @@ interface SettingsProps {
 }
 
 const Settings = ({ onSectionChange }: SettingsProps) => {
-  const t = useSyncExternalStore(i18nStore.subscribe, () => i18nStore.t.bind(i18nStore));
-  const lang = useSyncExternalStore(i18nStore.subscribe, i18nStore.getLang);
+  useSyncExternalStore(i18nStore.subscribe, i18nStore.getSnapshot);
+  const t = i18nStore.t;
+  const lang = i18nStore.getLang();
   const theme = useSyncExternalStore(themeStore.subscribe, themeStore.getTheme);
   const plan = useSyncExternalStore(subscriptionStore.subscribe, subscriptionStore.getPlan);
   const connections = useSyncExternalStore(apiKeyStore.subscribe, apiKeyStore.getConnections);
