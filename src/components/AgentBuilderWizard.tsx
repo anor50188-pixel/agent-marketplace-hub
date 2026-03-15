@@ -8,26 +8,16 @@ import {
   Check,
   Search,
   Globe,
-  AlignLeft,
   Code,
   Twitter,
   BarChart3,
   ChevronRight,
   Loader2,
   Bot,
-  Send,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
 
 const steps = [
   { id: 1, label: "Agent ma'lumotlari", icon: FileText },
@@ -36,13 +26,6 @@ const steps = [
   { id: 4, label: "Yaratish", icon: Rocket },
 ];
 
-const categories = [
-  { value: "marketing", label: "Marketing" },
-  { value: "programming", label: "Programming" },
-  { value: "research", label: "Research" },
-  { value: "business", label: "Business" },
-  { value: "content", label: "Content" },
-];
 
 interface Tool {
   id: string;
@@ -53,19 +36,19 @@ interface Tool {
 }
 
 const tools: Tool[] = [
-  { id: "web-search", label: "Web Search", description: "Internetdan ma'lumot qidirish", icon: Search, group: "basic" },
-  { id: "website-reader", label: "Website Reader", description: "Veb sahifalarni o'qish va tahlil qilish", icon: Globe, group: "basic" },
-  { id: "text-summarizer", label: "Text Summarizer", description: "Matnlarni qisqartirish", icon: AlignLeft, group: "basic" },
-  { id: "code-execution", label: "Code Execution", description: "Kod yozish va ishga tushirish", icon: Code, group: "advanced" },
-  { id: "social-search", label: "Social Media Search", description: "Ijtimoiy tarmoqlardan qidirish", icon: Twitter, group: "advanced" },
-  { id: "dashboard-builder", label: "Dashboard Builder", description: "Vizual dashboard yaratish", icon: BarChart3, group: "advanced" },
+  { id: "web-search", label: "Web Search (Serper)", description: "Internetdan ma'lumot topish va research qilish", icon: Search, group: "basic" },
+  { id: "website-reader", label: "Website Reader (Firecrawl)", description: "Web sahifani o'qish, tahlil qilish", icon: Globe, group: "basic" },
+  { id: "code-execution", label: "Code Execution (E2B)", description: "Kod yozish, data analysis, automation", icon: Code, group: "basic" },
+  { id: "social-search", label: "Social Media Search (X API)", description: "Trend analysis, audience research", icon: Twitter, group: "basic" },
+  { id: "file-analysis", label: "File / Data Analysis", description: "CSV, PDF, Excel tahlil qilish", icon: FileText, group: "advanced" },
+  { id: "dashboard-builder", label: "Dashboard Builder", description: "Agent natijalarini vizual dashboardda ko'rsatish", icon: BarChart3, group: "advanced" },
+  { id: "ai-brain", label: "AI Brain (MiniMax)", description: "Agentni boshqaruvchi AI model", icon: Bot, group: "advanced" },
 ];
 
 const AgentBuilderWizard = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [agentName, setAgentName] = useState("");
   const [agentDescription, setAgentDescription] = useState("");
-  const [category, setCategory] = useState("");
   const [selectedTools, setSelectedTools] = useState<string[]>([]);
   const [testInput, setTestInput] = useState("");
   const [testOutput, setTestOutput] = useState("");
@@ -80,7 +63,7 @@ const AgentBuilderWizard = () => {
   };
 
   const canNext = () => {
-    if (currentStep === 1) return agentName.trim() && agentDescription.trim() && category;
+    if (currentStep === 1) return agentName.trim() && agentDescription.trim();
     if (currentStep === 2) return selectedTools.length > 0;
     return true;
   };
@@ -152,21 +135,6 @@ const AgentBuilderWizard = () => {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label className="text-sm font-medium text-foreground">Kategoriya</Label>
-                <Select value={category} onValueChange={setCategory}>
-                  <SelectTrigger className="h-11 glass border-border/40">
-                    <SelectValue placeholder="Kategoriyani tanlang" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categories.map((cat) => (
-                      <SelectItem key={cat.value} value={cat.value}>
-                        {cat.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
           </motion.div>
         );
@@ -324,15 +292,9 @@ const AgentBuilderWizard = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-muted/30 p-3">
-                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Kategoriya</p>
-                      <p className="text-sm font-medium text-foreground capitalize">{category}</p>
-                    </div>
-                    <div className="rounded-xl bg-muted/30 p-3">
-                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Toollar</p>
-                      <p className="text-sm font-medium text-foreground">{selectedTools.length} ta tanlangan</p>
-                    </div>
+                  <div className="rounded-xl bg-muted/30 p-3">
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Toollar</p>
+                    <p className="text-sm font-medium text-foreground">{selectedTools.length} ta tanlangan</p>
                   </div>
 
                   <div className="flex flex-wrap gap-1.5">
