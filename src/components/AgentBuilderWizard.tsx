@@ -145,21 +145,6 @@ const AgentBuilderWizard = () => {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label className="text-sm font-medium text-foreground">Kategoriya</Label>
-                <Select value={category} onValueChange={setCategory}>
-                  <SelectTrigger className="h-11 glass border-border/40">
-                    <SelectValue placeholder="Kategoriyani tanlang" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categories.map((cat) => (
-                      <SelectItem key={cat.value} value={cat.value}>
-                        {cat.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
           </motion.div>
         );
