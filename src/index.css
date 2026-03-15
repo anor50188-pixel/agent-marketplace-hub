@@ -6,87 +6,89 @@
 
 @layer base {
   :root {
-    --background: 25 95% 55%;
-    --foreground: 20 20% 12%;
+    --background: 225 25% 8%;
+    --foreground: 210 20% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 20 20% 12%;
+    --card: 225 20% 12%;
+    --card-foreground: 210 20% 92%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 20 20% 12%;
+    --popover: 225 20% 12%;
+    --popover-foreground: 210 20% 92%;
 
-    --primary: 25 95% 55%;
+    --primary: 250 85% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 90% 62%;
+    --secondary: 195 90% 50%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 30 15% 92%;
-    --muted-foreground: 20 10% 45%;
+    --muted: 225 15% 18%;
+    --muted-foreground: 220 10% 55%;
 
-    --accent: 15 85% 50%;
+    --accent: 280 70% 60%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 15% 88%;
-    --input: 30 15% 88%;
-    --ring: 25 95% 55%;
+    --border: 225 15% 18%;
+    --input: 225 15% 20%;
+    --ring: 250 85% 65%;
 
-    --radius: 1rem;
+    --radius: 0.875rem;
 
     /* Agentus custom tokens */
-    --glass-bg: 0 0% 100% / 0.6;
-    --glass-border: 0 0% 100% / 0.3;
+    --glass-bg: 225 20% 12% / 0.7;
+    --glass-border: 225 15% 22% / 0.6;
     --glass-blur: 20px;
-    --gradient-primary: linear-gradient(135deg, hsl(25 95% 55%), hsl(15 85% 50%));
-    --gradient-accent: linear-gradient(135deg, hsl(30 90% 62%), hsl(25 95% 55%));
-    --gradient-warm: linear-gradient(135deg, hsl(15 85% 50%), hsl(0 80% 55%));
-    --shadow-glass: 0 8px 32px hsl(25 95% 55% / 0.1);
-    --shadow-glass-hover: 0 12px 40px hsl(25 95% 55% / 0.18);
+    --gradient-primary: linear-gradient(135deg, hsl(250 85% 65%), hsl(280 70% 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(195 90% 50%), hsl(250 85% 65%));
+    --gradient-warm: linear-gradient(135deg, hsl(280 70% 60%), hsl(330 70% 55%));
+    --gradient-surface: linear-gradient(145deg, hsl(225 20% 13%), hsl(225 20% 10%));
+    --shadow-glass: 0 8px 32px hsl(0 0% 0% / 0.3);
+    --shadow-glass-hover: 0 12px 40px hsl(250 85% 65% / 0.15);
+    --shadow-glow: 0 0 40px hsl(250 85% 65% / 0.1);
 
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
 
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 20 20% 15%;
-    --sidebar-primary: 25 95% 55%;
+    --sidebar-background: 225 22% 10%;
+    --sidebar-foreground: 210 20% 88%;
+    --sidebar-primary: 250 85% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 25 95% 55% / 0.08;
-    --sidebar-accent-foreground: 20 20% 12%;
-    --sidebar-border: 25 40% 90%;
-    --sidebar-ring: 25 95% 55%;
+    --sidebar-accent: 250 85% 65% / 0.1;
+    --sidebar-accent-foreground: 210 20% 92%;
+    --sidebar-border: 225 15% 16%;
+    --sidebar-ring: 250 85% 65%;
   }
 
   .dark {
-    --background: 25 95% 55%;
-    --foreground: 20 20% 12%;
-    --card: 0 0% 100%;
-    --card-foreground: 20 20% 12%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 20 20% 12%;
-    --primary: 25 95% 55%;
+    --background: 225 25% 8%;
+    --foreground: 210 20% 92%;
+    --card: 225 20% 12%;
+    --card-foreground: 210 20% 92%;
+    --popover: 225 20% 12%;
+    --popover-foreground: 210 20% 92%;
+    --primary: 250 85% 65%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 30 90% 62%;
+    --secondary: 195 90% 50%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 30 15% 92%;
-    --muted-foreground: 20 10% 45%;
-    --accent: 15 85% 50%;
+    --muted: 225 15% 18%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 280 70% 60%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 25 40% 90%;
-    --input: 25 40% 90%;
-    --ring: 25 95% 55%;
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 20 20% 15%;
-    --sidebar-primary: 25 95% 55%;
+    --border: 225 15% 18%;
+    --input: 225 15% 20%;
+    --ring: 250 85% 65%;
+    --sidebar-background: 225 22% 10%;
+    --sidebar-foreground: 210 20% 88%;
+    --sidebar-primary: 250 85% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 25 95% 55% / 0.1;
-    --sidebar-accent-foreground: 20 20% 12%;
-    --sidebar-border: 25 40% 90%;
-    --sidebar-ring: 25 95% 55%;
+    --sidebar-accent: 250 85% 65% / 0.1;
+    --sidebar-accent-foreground: 210 20% 92%;
+    --sidebar-border: 225 15% 16%;
+    --sidebar-ring: 250 85% 65%;
   }
 }
 
@@ -114,7 +116,7 @@
 
   .glass-hover:hover {
     box-shadow: var(--shadow-glass-hover);
-    border-color: hsl(var(--primary) / 0.2);
+    border-color: hsl(var(--primary) / 0.3);
   }
 
   .gradient-text {
@@ -133,7 +135,7 @@
   .gradient-btn:hover {
     opacity: 0.9;
     transform: translateY(-1px);
-    box-shadow: 0 8px 25px hsl(230 80% 60% / 0.3);
+    box-shadow: 0 8px 30px hsl(250 85% 65% / 0.3);
   }
 
   .gradient-accent-btn {
@@ -141,12 +143,17 @@
     color: hsl(var(--primary-foreground));
   }
 
+  .surface-card {
+    background: var(--gradient-surface);
+    border: 1px solid hsl(var(--border));
+  }
+
   /* Chat Workspace styles */
   .chat-bubble-ai {
-    background: hsl(var(--muted) / 0.4);
+    background: hsl(var(--muted) / 0.5);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid hsl(var(--border) / 0.3);
+    border: 1px solid hsl(var(--border) / 0.5);
     color: hsl(var(--foreground));
   }
 
@@ -156,20 +163,20 @@
   }
 
   .chat-input-container {
-    background: hsl(var(--muted) / 0.3);
+    background: hsl(var(--muted) / 0.4);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid hsl(var(--border) / 0.3);
+    border: 1px solid hsl(var(--border) / 0.5);
   }
 
   .chat-input-container:focus-within {
-    border-color: hsl(var(--primary) / 0.4);
+    border-color: hsl(var(--primary) / 0.5);
     box-shadow: 0 0 20px hsl(var(--primary) / 0.1);
   }
 
   /* Top Toolbar */
   .top-toolbar {
-    background: hsl(var(--card) / 0.5);
+    background: hsl(var(--card) / 0.6);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
@@ -180,7 +187,7 @@
   }
 
   .toolbar-chip-active {
-    border: 1px solid hsl(var(--primary) / 0.3);
+    border: 1px solid hsl(var(--primary) / 0.4);
   }
 
   .toolbar-chip-idle {
@@ -189,7 +196,7 @@
 
   .toolbar-chip-locked {
     cursor: not-allowed;
-    opacity: 0.45;
+    opacity: 0.35;
   }
 
   .active-tool-badge {
@@ -199,9 +206,9 @@
   }
 
   .dock-tooltip {
-    background: hsl(var(--card) / 0.9);
+    background: hsl(var(--card) / 0.95);
     backdrop-filter: blur(12px);
-    border: 1px solid hsl(var(--border) / 0.3);
-    box-shadow: 0 4px 12px hsl(0 0% 0% / 0.2);
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: 0 4px 12px hsl(0 0% 0% / 0.4);
   }
 }
