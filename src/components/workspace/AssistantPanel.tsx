@@ -175,7 +175,7 @@ const AssistantPanel = ({ state }: AssistantPanelProps) => {
         </div>
         <div className="flex-1 overflow-auto p-3">
           <pre className="text-[11px] font-mono text-slate-400 whitespace-pre-wrap leading-relaxed">
-            {sandboxOutput || "// Test your agent here..."}
+            {sandboxOutput || "// Agentni shu yerda sinab ko'ring..."}
           </pre>
         </div>
         <div className="px-3 pb-3">
