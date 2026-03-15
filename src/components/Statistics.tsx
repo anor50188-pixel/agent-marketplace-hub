@@ -5,6 +5,8 @@ import {
   Bot, ShoppingCart, Users, BarChart3, ArrowUpRight, Clock, ChevronDown
 } from "lucide-react";
 import { agentStore, type AgentConfig } from "@/lib/agentStore";
+import { subscriptionStore } from "@/lib/subscriptionStore";
+import UpgradePrompt from "./UpgradePrompt";
 
 // Mock seller stats
 const overviewStats = {

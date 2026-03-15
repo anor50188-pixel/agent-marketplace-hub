@@ -106,11 +106,25 @@ const AgentCreatorChat = () => {
     if (pendingAgent && ["ha", "ok", "tasdiqlash", "yes", "saqlash", "save", "yaratish", "create"].some((w) => msg.toLowerCase().includes(w))) {
       // Confirm creation
       setTimeout(() => {
+        const currentAgents = agentStore.getAgents();
+        if (!subscriptionStore.canCreateAgent(currentAgents.length)) {
+          const planConfig = subscriptionStore.getPlanConfig();
+          addMessage(
+            "assistant",
+            `⚠️ **Agent limiti tugadi!**\n\n${planConfig.name} rejada ${planConfig.limits.maxAgents} ta agent yaratish mumkin. Hozirda ${currentAgents.length} ta agentingiz bor.\n\nRejani yangilash uchun "Obuna" bo'limiga o'ting.`
+          );
+          setIsTyping(false);
+          return;
+        }
+
+        const maxTools = subscriptionStore.getMaxTools();
+        const limitedTools = (pendingAgent.tools || ["ai-brain"]).slice(0, maxTools);
+
         const newAgent: AgentConfig = {
           id: "agent-" + Date.now(),
           name: pendingAgent.name || "Yangi Agent",
           role: pendingAgent.role || "",
-          tools: pendingAgent.tools || ["ai-brain"],
+          tools: limitedTools,
           status: "active",
           createdAt: new Date().toISOString().split("T")[0],
           category: pendingAgent.category,
@@ -120,9 +134,14 @@ const AgentCreatorChat = () => {
         agentStore.addAgent(newAgent);
         setIsCreated(true);
         setPendingAgent(null);
+
+        const toolWarning = limitedTools.length < (pendingAgent.tools || []).length
+          ? `\n\n⚠️ ${subscriptionStore.getPlanConfig().name} rejada agentga ${maxTools} ta tool ruxsat etilgan. Ba'zi toollar olib tashlandi.`
+          : "";
+
         addMessage(
           "assistant",
-          `✅ **"${newAgent.name}"** agenti muvaffaqiyatli yaratildi! 🎉\n\n"Agentlarim" bo'limida topishingiz va sozlashingiz mumkin.\n\nYana agent yaratmoqchimisiz? Shunchaki yozing!`
+          `✅ **"${newAgent.name}"** agenti muvaffaqiyatli yaratildi! 🎉\n\n"Agentlarim" bo'limida topishingiz va sozlashingiz mumkin.${toolWarning}\n\nYana agent yaratmoqchimisiz? Shunchaki yozing!`
         );
         setIsTyping(false);
         toast({

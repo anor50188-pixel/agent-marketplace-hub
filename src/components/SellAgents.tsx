@@ -118,6 +118,29 @@ const SellAgents = ({ onSectionChange }: { onSectionChange?: (id: string) => voi
   const sellerEarning = Math.round(price * (1 - COMMISSION) * 100) / 100;
 
   // STEP: Select Agent
+  if (!canSell) {
+    return (
+      <div className="flex-1 flex flex-col min-h-0 bg-background">
+        <div className="px-6 pt-8 pb-4">
+          <h1 className="font-display text-2xl font-bold text-foreground mb-1">
+            Agent <span className="gradient-text">Sotish</span>
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Agentlaringizni marketplace'ga qo'yib daromad oling
+          </p>
+        </div>
+        <div className="px-6">
+          <UpgradePrompt
+            title="Agent sotish uchun Pro Max kerak"
+            description="Agentlaringizni marketplace'ga qo'yish va daromad olish uchun Pro Max rejaga o'ting."
+            requiredPlan="Pro Max"
+            onUpgrade={() => onSectionChange?.("subscriptions")}
+          />
+        </div>
+      </div>
+    );
+  }
+
   if (step === "select") {
     return (
       <div className="flex-1 flex flex-col min-h-0 bg-background">

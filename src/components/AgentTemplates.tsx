@@ -74,20 +74,37 @@ const templates = [
   },
 ];
 
-const AgentTemplates = () => {
+const AgentTemplates = ({ onSectionChange }: { onSectionChange?: (id: string) => void }) => {
+  const agents = useSyncExternalStore(agentStore.subscribe, agentStore.getAgents);
+  const currentPlan = useSyncExternalStore(subscriptionStore.subscribe, subscriptionStore.getPlan);
+  const planConfig = subscriptionStore.getPlanConfig();
+
   const handleCreate = (template: typeof templates[0]) => {
+    if (!subscriptionStore.canCreateAgent(agents.length)) {
+      toast({
+        title: "⚠️ Agent limiti tugadi",
+        description: `${planConfig.name} rejada ${planConfig.limits.maxAgents} ta agent yaratish mumkin. Rejani yangilang.`,
+      });
+      return;
+    }
+
+    const maxTools = subscriptionStore.getMaxTools();
+    const limitedTools = template.tools.slice(0, maxTools);
+
     const newAgent = {
       id: "agent-" + Date.now(),
       name: template.title,
       role: template.role,
-      tools: template.tools,
+      tools: limitedTools,
       status: "active" as const,
       createdAt: new Date().toISOString().split("T")[0],
     };
     agentStore.addAgent(newAgent);
     toast({
       title: `✅ "${template.title}" yaratildi!`,
-      description: "Agent 'Agentlarim' sahifasiga qo'shildi.",
+      description: limitedTools.length < template.tools.length
+        ? `Agent yaratildi, lekin ${planConfig.name} rejada ${maxTools} ta tool cheklovi bor.`
+        : "Agent 'Agentlarim' sahifasiga qo'shildi.",
     });
   };
 
