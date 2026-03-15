@@ -132,8 +132,8 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                     <Label className="text-sm text-slate-300">AI modeli</Label>
                     <div className="grid grid-cols-2 gap-2">
                       {[
-                        { id: "minimax", name: "MiniMax", desc: "Fast & efficient" },
-                        { id: "gpt4", name: "GPT-4o", desc: "Most capable" },
+                        { id: "minimax", name: "MiniMax", desc: "Tez va samarali" },
+                        { id: "gpt4", name: "GPT-4o", desc: "Eng kuchli" },
                       ].map((m) => (
                         <button
                           key={m.id}
