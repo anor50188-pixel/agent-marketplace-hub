@@ -42,9 +42,9 @@ function generateResponse(input: string, state: WorkspaceState): string {
     return "Yuqori o'ng burchakdagi 'Marketga joylashtirish' tugmasini bosing!";
   }
   if (q.includes("model") || q.includes("temperature")) {
-    return `Hozirgi model: ${state.modelSettings.model === "minimax" ? "MiniMax" : "GPT-4o"}, Temperature: ${state.modelSettings.temperature}, Max tokens: ${state.modelSettings.maxTokens}. Explorer → Model Settings dan o'zgartiring.`;
+    return `Hozirgi model: ${state.modelSettings.model === "minimax" ? "MiniMax" : "GPT-4o"}, Harorat: ${state.modelSettings.temperature}, Maks tokenlar: ${state.modelSettings.maxTokens}. Chap panel → Model sozlamalari dan o'zgartiring.`;
   }
-  return `"${state.agentName || "Agent"}" uchun yordam beraman. Tool tanlash, model sozlash yoki deploy haqida so'rang.`;
+  return `"${state.agentName || "Agent"}" uchun yordam beraman. Tool tanlash, model sozlash yoki joylashtirish haqida so'rang.`;
 }
 
 interface AssistantPanelProps {
