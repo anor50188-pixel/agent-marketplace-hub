@@ -7,6 +7,7 @@ const menuGroups = [
     items: [
       { id: "create", label: "Agent yaratish", icon: Plus },
       { id: "my-agents", label: "Agentlarim", icon: Bot },
+      { id: "sell", label: "Agent sotish", icon: Store },
     ],
   },
   {

@@ -5,6 +5,7 @@ import MyAgents from "./MyAgents";
 import IntegrationsSection from "./IntegrationsSection";
 import AgentTemplates from "./AgentTemplates";
 import Marketplace from "./Marketplace";
+import SellAgents from "./SellAgents";
 
 interface DashboardContentProps {
   activeSection: string;
@@ -19,7 +20,8 @@ const DashboardContent = ({ activeSection }: DashboardContentProps) => {
       {activeSection === "templates" && <AgentTemplates />}
       {activeSection === "integrations" && <IntegrationsSection />}
       {activeSection === "marketplace" && <Marketplace />}
-      {!["create", "my-agents", "apps", "templates", "integrations", "marketplace"].includes(activeSection) && (
+      {activeSection === "sell" && <SellAgents />}
+      {!["create", "my-agents", "apps", "templates", "integrations", "marketplace", "sell"].includes(activeSection) && (
         <div className="flex-1 flex items-center justify-center">
           <p className="text-muted-foreground text-sm">
             {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)} — tez orada...
