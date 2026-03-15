@@ -85,9 +85,15 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
-              <button className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold w-full">
-                Kirish
-              </button>
+              {user ? (
+                <button onClick={signOut} className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold w-full">
+                  Chiqish
+                </button>
+              ) : (
+                <button onClick={() => navigate("/auth")} className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold w-full">
+                  Kirish
+                </button>
+              )}
             </div>
           </motion.div>
         )}
