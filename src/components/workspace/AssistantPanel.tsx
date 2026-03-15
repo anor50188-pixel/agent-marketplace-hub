@@ -107,7 +107,7 @@ const AssistantPanel = ({ state }: AssistantPanelProps) => {
       {/* Chat Header */}
       <div className="h-10 shrink-0 flex items-center gap-2 px-4 border-b border-white/10">
         <Bot className="w-4 h-4 text-purple-400" />
-        <span className="text-xs font-semibold text-slate-300">AI Assistant</span>
+        <span className="text-xs font-semibold text-slate-300">AI Yordamchi</span>
       </div>
 
       {/* Chat Messages */}
