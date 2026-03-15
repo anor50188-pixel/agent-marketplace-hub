@@ -13,11 +13,11 @@ interface CanvasPanelProps {
 }
 
 const sectionMeta: Record<string, { label: string; icon: React.ElementType }> = {
-  info: { label: "Agent Info", icon: FileText },
-  knowledge: { label: "Knowledge Base", icon: Database },
-  tools: { label: "Tools", icon: Wrench },
-  model: { label: "Model Settings", icon: Settings },
-  output: { label: "Output", icon: Monitor },
+  info: { label: "Agent ma'lumotlari", icon: FileText },
+  knowledge: { label: "Bilimlar bazasi", icon: Database },
+  tools: { label: "Toollar", icon: Wrench },
+  model: { label: "Model sozlamalari", icon: Settings },
+  output: { label: "Chiqish kanallari", icon: Monitor },
 };
 
 const pageVariants = {
