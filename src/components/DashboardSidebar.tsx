@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown } from "lucide-react";
+import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown, Store } from "lucide-react";
 
 const menuGroups = [
   {
