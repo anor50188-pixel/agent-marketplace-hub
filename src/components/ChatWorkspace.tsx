@@ -184,46 +184,13 @@ const ChatWorkspace = () => {
   // Chat state — messages exist
   return (
     <div className="flex-1 flex flex-col min-h-0 relative bg-background">
-      {/* Active Tools Bar */}
-      <AnimatePresence>
-        {activeTools.length > 0 && (
-          <motion.div
-            initial={{ y: -40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="flex items-center gap-2 px-6 py-3 border-b border-border/20"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground font-medium mr-2">Faol toollar:</span>
-            <div className="flex items-center gap-1.5 flex-wrap">
-              {activeTools.map((toolId) => {
-                const tool = workspaceTools.find((t) => t.id === toolId);
-                if (!tool) return null;
-                return (
-                  <motion.div
-                    key={tool.id}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0, opacity: 0 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                    className="active-tool-badge flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium"
-                  >
-                    <span>{tool.icon}</span>
-                    <span className="text-foreground/90">{tool.shortLabel}</span>
-                    {toolId !== "ai-brain" && (
-                      <button
-                        onClick={() => removeActiveTool(toolId)}
-                        className="ml-0.5 hover:text-destructive transition-colors"
-                      >
-                        <X className="w-3 h-3" />
-                      </button>
-                    )}
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Top Toolbar */}
+      <TopToolbar
+        tools={workspaceTools}
+        activeTools={activeTools}
+        onToolClick={handleToolClick}
+        isToolUnlocked={isToolUnlocked}
+      />
 
       {/* Chat Area */}
       <div className="flex-1 overflow-auto px-6 py-6">
