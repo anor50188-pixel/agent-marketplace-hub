@@ -13,18 +13,18 @@ import {
   BarChart3,
   ChevronRight,
   Loader2,
-  Bot,
-} from "lucide-react";
+  Bot } from
+"lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
 const steps = [
-  { id: 1, label: "Agent ma'lumotlari", icon: FileText },
-  { id: 2, label: "Tool tanlash", icon: Wrench },
-  { id: 3, label: "Test qilish", icon: Play },
-  { id: 4, label: "Yaratish", icon: Rocket },
-];
+{ id: 1, label: "Agent ma'lumotlari", icon: FileText },
+{ id: 2, label: "Tool tanlash", icon: Wrench },
+{ id: 3, label: "Test qilish", icon: Play },
+{ id: 4, label: "Yaratish", icon: Rocket }];
+
 
 
 interface Tool {
@@ -36,14 +36,14 @@ interface Tool {
 }
 
 const tools: Tool[] = [
-  { id: "web-search", label: "Web Search (Serper)", description: "Internetdan ma'lumot topish va research qilish", icon: Search, group: "basic" },
-  { id: "website-reader", label: "Website Reader (Firecrawl)", description: "Web sahifani o'qish, tahlil qilish", icon: Globe, group: "basic" },
-  { id: "code-execution", label: "Code Execution (E2B)", description: "Kod yozish, data analysis, automation", icon: Code, group: "basic" },
-  { id: "social-search", label: "Social Media Search (X API)", description: "Trend analysis, audience research", icon: Twitter, group: "basic" },
-  { id: "file-analysis", label: "File / Data Analysis", description: "CSV, PDF, Excel tahlil qilish", icon: FileText, group: "advanced" },
-  { id: "dashboard-builder", label: "Dashboard Builder", description: "Agent natijalarini vizual dashboardda ko'rsatish", icon: BarChart3, group: "advanced" },
-  { id: "ai-brain", label: "AI Brain (MiniMax)", description: "Agentni boshqaruvchi AI model", icon: Bot, group: "advanced" },
-];
+{ id: "web-search", label: "Web Search (Serper)", description: "Internetdan ma'lumot topish va research qilish", icon: Search, group: "basic" },
+{ id: "website-reader", label: "Website Reader (Firecrawl)", description: "Web sahifani o'qish, tahlil qilish", icon: Globe, group: "basic" },
+{ id: "code-execution", label: "Code Execution (E2B)", description: "Kod yozish, data analysis, automation", icon: Code, group: "basic" },
+{ id: "social-search", label: "Social Media Search (X API)", description: "Trend analysis, audience research", icon: Twitter, group: "basic" },
+{ id: "file-analysis", label: "File / Data Analysis", description: "CSV, PDF, Excel tahlil qilish", icon: FileText, group: "advanced" },
+{ id: "dashboard-builder", label: "Dashboard Builder", description: "Agent natijalarini vizual dashboardda ko'rsatish", icon: BarChart3, group: "advanced" },
+{ id: "ai-brain", label: "AI Brain (MiniMax)", description: "Agentni boshqaruvchi AI model", icon: Bot, group: "advanced" }];
+
 
 const AgentBuilderWizard = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -58,7 +58,7 @@ const AgentBuilderWizard = () => {
 
   const toggleTool = (id: string) => {
     setSelectedTools((prev) =>
-      prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id]
+    prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id]
     );
   };
 
@@ -106,8 +106,8 @@ const AgentBuilderWizard = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="space-y-6"
-          >
+            className="space-y-6">
+            
             <div>
               <h2 className="text-2xl font-display font-bold text-foreground mb-1">Agent ma'lumotlari</h2>
               <p className="text-sm text-muted-foreground">Agentingiz haqida asosiy ma'lumotlarni kiriting</p>
@@ -120,8 +120,8 @@ const AgentBuilderWizard = () => {
                   placeholder="Masalan: Marketing Trend Hunter"
                   value={agentName}
                   onChange={(e) => setAgentName(e.target.value)}
-                  className="h-11 glass border-border/40 focus:border-primary/50"
-                />
+                  className="h-11 glass border-border/40 focus:border-primary/50" />
+                
               </div>
 
               <div className="space-y-2">
@@ -131,13 +131,13 @@ const AgentBuilderWizard = () => {
                   value={agentDescription}
                   onChange={(e) => setAgentDescription(e.target.value)}
                   rows={3}
-                  className="w-full rounded-md border border-border/40 bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 glass"
-                />
+                  className="w-full rounded-md border border-border/40 bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 glass" />
+                
               </div>
 
             </div>
-          </motion.div>
-        );
+          </motion.div>);
+
 
       case 2:
         return (
@@ -146,38 +146,38 @@ const AgentBuilderWizard = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="space-y-6"
-          >
+            className="space-y-6">
+            
             <div>
               <h2 className="text-2xl font-display font-bold text-foreground mb-1">Tool tanlash</h2>
               <p className="text-sm text-muted-foreground">Agent ishlatadigan vositalarni tanlang</p>
             </div>
 
-            {(["basic", "advanced"] as const).map((group) => (
-              <div key={group}>
+            {(["basic", "advanced"] as const).map((group) =>
+            <div key={group}>
                 <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-3">
                   {group === "basic" ? "Asosiy toollar" : "Kengaytirilgan toollar"}
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {tools
-                    .filter((t) => t.group === group)
-                    .map((tool) => {
-                      const isSelected = selectedTools.includes(tool.id);
-                      return (
-                        <motion.button
-                          key={tool.id}
-                          whileHover={{ scale: 1.01 }}
-                          whileTap={{ scale: 0.99 }}
-                          onClick={() => toggleTool(tool.id)}
-                          className={`flex items-center gap-3 p-4 rounded-xl border text-left transition-all ${
-                            isSelected
-                              ? "border-primary/50 bg-primary/5 shadow-[0_0_15px_hsl(var(--primary)/0.1)]"
-                              : "glass border-border/30 hover:border-border/50"
-                          }`}
-                        >
+                  {tools.
+                filter((t) => t.group === group).
+                map((tool) => {
+                  const isSelected = selectedTools.includes(tool.id);
+                  return (
+                    <motion.button
+                      key={tool.id}
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
+                      onClick={() => toggleTool(tool.id)}
+                      className={`flex items-center gap-3 p-4 rounded-xl border text-left transition-all ${
+                      isSelected ?
+                      "border-primary/50 bg-primary/5 shadow-[0_0_15px_hsl(var(--primary)/0.1)]" :
+                      "glass border-border/30 hover:border-border/50"}`
+                      }>
+                      
                           <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${
-                            isSelected ? "bg-primary/20" : "bg-muted/50"
-                          }`}>
+                      isSelected ? "bg-primary/20" : "bg-muted/50"}`
+                      }>
                             <tool.icon className={`w-5 h-5 ${isSelected ? "text-primary" : "text-muted-foreground"}`} />
                           </div>
                           <div className="flex-1 min-w-0">
@@ -185,18 +185,18 @@ const AgentBuilderWizard = () => {
                             <p className="text-xs text-muted-foreground">{tool.description}</p>
                           </div>
                           <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-colors ${
-                            isSelected ? "bg-primary border-primary" : "border-border"
-                          }`}>
+                      isSelected ? "bg-primary border-primary" : "border-border"}`
+                      }>
                             {isSelected && <Check className="w-3 h-3 text-primary-foreground" />}
                           </div>
-                        </motion.button>
-                      );
-                    })}
+                        </motion.button>);
+
+                })}
                 </div>
               </div>
-            ))}
-          </motion.div>
-        );
+            )}
+          </motion.div>);
+
 
       case 3:
         return (
@@ -205,8 +205,8 @@ const AgentBuilderWizard = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="space-y-6"
-          >
+            className="space-y-6">
+            
             <div>
               <h2 className="text-2xl font-display font-bold text-foreground mb-1">Agentni test qilish</h2>
               <p className="text-sm text-muted-foreground">Yaratishdan oldin agentni sinab ko'ring</p>
@@ -224,13 +224,13 @@ const AgentBuilderWizard = () => {
                 </div>
               </div>
               <div className="flex flex-wrap gap-1.5">
-                {tools
-                  .filter((t) => selectedTools.includes(t.id))
-                  .map((t) => (
-                    <span key={t.id} className="text-[10px] px-2 py-1 rounded-md bg-primary/10 text-primary font-medium">
+                {tools.
+                filter((t) => selectedTools.includes(t.id)).
+                map((t) =>
+                <span key={t.id} className="text-[10px] px-2 py-1 rounded-md bg-primary/10 text-primary font-medium">
                       {t.label}
                     </span>
-                  ))}
+                )}
               </div>
             </div>
 
@@ -242,13 +242,13 @@ const AgentBuilderWizard = () => {
                   value={testInput}
                   onChange={(e) => setTestInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && runTest()}
-                  className="h-11 flex-1 glass border-border/40"
-                />
+                  className="h-11 flex-1 glass border-border/40" />
+                
                 <Button
                   onClick={runTest}
                   disabled={testRunning || !testInput.trim()}
-                  className="h-11 px-5 gradient-btn border-0 gap-2"
-                >
+                  className="h-11 px-5 gradient-btn border-0 gap-2">
+                  
                   {testRunning ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
                   Run Test
                 </Button>
@@ -261,8 +261,8 @@ const AgentBuilderWizard = () => {
                 </pre>
               </div>
             </div>
-          </motion.div>
-        );
+          </motion.div>);
+
 
       case 4:
         return (
@@ -271,10 +271,10 @@ const AgentBuilderWizard = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="space-y-6"
-          >
-            {!created ? (
-              <>
+            className="space-y-6">
+            
+            {!created ?
+            <>
                 <div>
                   <h2 className="text-2xl font-display font-bold text-foreground mb-1">Agent yaratish</h2>
                   <p className="text-sm text-muted-foreground">Hamma narsa tayyor! Agentni ishga tushiring.</p>
@@ -298,46 +298,46 @@ const AgentBuilderWizard = () => {
                   </div>
 
                   <div className="flex flex-wrap gap-1.5">
-                    {tools
-                      .filter((t) => selectedTools.includes(t.id))
-                      .map((t) => (
-                        <span key={t.id} className="text-xs px-2.5 py-1 rounded-lg bg-primary/10 text-primary font-medium">
+                    {tools.
+                  filter((t) => selectedTools.includes(t.id)).
+                  map((t) =>
+                  <span key={t.id} className="text-xs px-2.5 py-1 rounded-lg bg-primary/10 text-primary font-medium">
                           {t.label}
                         </span>
-                      ))}
+                  )}
                   </div>
                 </div>
 
                 <Button
-                  onClick={handleCreate}
-                  disabled={creating}
-                  className="w-full h-14 text-base font-semibold rounded-xl gradient-btn border-0 shadow-[0_0_25px_hsl(var(--primary)/0.2)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.3)] transition-shadow gap-2"
-                >
-                  {creating ? (
-                    <>
+                onClick={handleCreate}
+                disabled={creating}
+                className="w-full h-14 text-base font-semibold rounded-xl gradient-btn border-0 shadow-[0_0_25px_hsl(var(--primary)/0.2)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.3)] transition-shadow gap-2">
+                
+                  {creating ?
+                <>
                       <Loader2 className="w-5 h-5 animate-spin" />
                       Agent yaratilmoqda...
-                    </>
-                  ) : (
-                    <>
+                    </> :
+
+                <>
                       <Rocket className="w-5 h-5" />
                       Agent yaratish va ishga tushirish
                     </>
-                  )}
+                }
                 </Button>
-              </>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center justify-center text-center py-12 space-y-6"
-              >
+              </> :
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex flex-col items-center justify-center text-center py-12 space-y-6">
+              
                 <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-                  className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[0_0_40px_hsl(var(--primary)/0.3)]"
-                >
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+                className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[0_0_40px_hsl(var(--primary)/0.3)]">
+                
                   <Check className="w-10 h-10 text-primary-foreground" />
                 </motion.div>
                 <div>
@@ -351,9 +351,9 @@ const AgentBuilderWizard = () => {
                   <span className="text-sm font-medium text-accent">Ishlayapti — 24/7</span>
                 </div>
               </motion.div>
-            )}
-          </motion.div>
-        );
+            }
+          </motion.div>);
+
 
       default:
         return null;
@@ -373,75 +373,75 @@ const AgentBuilderWizard = () => {
                 <div className="flex flex-col items-center">
                   <motion.div
                     animate={{
-                      scale: isActive ? 1.1 : 1,
+                      scale: isActive ? 1.1 : 1
                     }}
                     className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                      isCompleted
-                        ? "bg-primary text-primary-foreground"
-                        : isActive
-                        ? "bg-primary/20 text-primary border-2 border-primary/50"
-                        : "bg-muted/50 text-muted-foreground"
-                    }`}
-                  >
-                    {isCompleted ? (
-                      <Check className="w-4 h-4" />
-                    ) : (
-                      <step.icon className="w-4 h-4" />
-                    )}
+                    isCompleted ?
+                    "bg-primary text-primary-foreground" :
+                    isActive ?
+                    "bg-primary/20 text-primary border-2 border-primary/50" :
+                    "bg-muted/50 text-muted-foreground"}`
+                    }>
+                    
+                    {isCompleted ?
+                    <Check className="w-4 h-4" /> :
+
+                    <step.icon className="w-4 h-4" />
+                    }
                   </motion.div>
-                  {index < steps.length - 1 && (
-                    <div className={`w-0.5 h-8 my-1 rounded-full transition-colors ${
-                      isCompleted ? "bg-primary" : "bg-border"
-                    }`} />
-                  )}
+                  {index < steps.length - 1 &&
+                  <div className={`w-0.5 h-8 my-1 rounded-full transition-colors ${
+                  isCompleted ? "bg-primary" : "bg-border"}`
+                  } />
+                  }
                 </div>
                 <div className="pt-2">
                   <p className={`text-sm font-medium transition-colors ${
-                    isActive ? "text-foreground" : isCompleted ? "text-primary" : "text-muted-foreground"
-                  }`}>
+                  isActive ? "text-foreground" : isCompleted ? "text-primary" : "text-muted-foreground"}`
+                  }>
                     {step.label}
                   </p>
                 </div>
-              </div>
-            );
+              </div>);
+
           })}
         </div>
       </div>
 
       {/* Right content */}
       <div className="flex-1 flex flex-col min-w-0 min-h-0">
-        <div className="flex-1 overflow-auto p-8 max-w-2xl">
-          <AnimatePresence mode="wait">
-            {renderStepContent()}
-          </AnimatePresence>
-        </div>
+        
+
+
+
+        
 
         {/* Bottom navigation */}
-        {!created && (
-          <div className="p-6 border-t border-border/30 flex items-center justify-between">
+        {!created &&
+        <div className="p-6 border-t border-border/30 flex items-center justify-between">
             <Button
-              variant="ghost"
-              onClick={() => setCurrentStep((s) => Math.max(1, s - 1))}
-              disabled={currentStep === 1}
-              className="gap-1"
-            >
+            variant="ghost"
+            onClick={() => setCurrentStep((s) => Math.max(1, s - 1))}
+            disabled={currentStep === 1}
+            className="gap-1">
+            
               Orqaga
             </Button>
-            {currentStep < 4 && (
-              <Button
-                onClick={() => setCurrentStep((s) => Math.min(4, s + 1))}
-                disabled={!canNext()}
-                className="gradient-btn border-0 gap-1 px-6"
-              >
+            {currentStep < 4 &&
+          <Button
+            onClick={() => setCurrentStep((s) => Math.min(4, s + 1))}
+            disabled={!canNext()}
+            className="gradient-btn border-0 gap-1 px-6">
+            
                 Keyingi
                 <ChevronRight className="w-4 h-4" />
               </Button>
-            )}
+          }
           </div>
-        )}
+        }
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default AgentBuilderWizard;
