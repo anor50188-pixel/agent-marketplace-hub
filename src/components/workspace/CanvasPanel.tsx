@@ -181,8 +181,8 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
             {state.activeNode === "output" && (
               <div className="max-w-lg space-y-5">
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-1">Output Channels</h2>
-                  <p className="text-sm text-slate-400">Choose where your agent delivers results.</p>
+                <h2 className="text-xl font-bold text-white mb-1">Chiqish kanallari</h2>
+                  <p className="text-sm text-slate-400">Agent natijalarini qayerga yuborishini tanlang.</p>
                 </div>
                 <div className="space-y-3">
                   {[
