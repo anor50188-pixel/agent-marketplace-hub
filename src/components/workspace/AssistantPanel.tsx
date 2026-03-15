@@ -153,7 +153,7 @@ const AssistantPanel = ({ state }: AssistantPanelProps) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            placeholder="Ask anything..."
+            placeholder="Savolingizni yozing..."
             className="h-8 text-xs bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus-visible:ring-purple-500/50"
           />
           <Button
