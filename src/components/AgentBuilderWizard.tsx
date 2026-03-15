@@ -59,7 +59,6 @@ const AgentBuilderWizard = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [agentName, setAgentName] = useState("");
   const [agentDescription, setAgentDescription] = useState("");
-  const [category, setCategory] = useState("");
   const [selectedTools, setSelectedTools] = useState<string[]>([]);
   const [testInput, setTestInput] = useState("");
   const [testOutput, setTestOutput] = useState("");
