@@ -273,13 +273,6 @@ const ChatWorkspace = () => {
             </div>
           </div>
         </div>
-
-        <ToolDock
-          tools={workspaceTools}
-          activeTools={activeTools}
-          onToolClick={handleToolClick}
-          isToolUnlocked={isToolUnlocked}
-        />
       </div>
     </div>
   );
