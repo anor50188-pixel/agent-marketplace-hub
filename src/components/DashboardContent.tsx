@@ -15,9 +15,10 @@ const DashboardContent = ({ activeSection }: DashboardContentProps) => {
       {activeSection === "create" && <AgentCreatorChat />}
       {activeSection === "my-agents" && <MyAgents />}
       {activeSection === "apps" && <AppsSection />}
+      {activeSection === "templates" && <AgentTemplates />}
       {activeSection === "integrations" && <IntegrationsSection />}
       {/* Placeholder for other sections */}
-      {!["create", "my-agents", "apps", "integrations"].includes(activeSection) && (
+      {!["create", "my-agents", "apps", "templates", "integrations"].includes(activeSection) && (
         <div className="flex-1 flex items-center justify-center">
           <p className="text-muted-foreground text-sm">
             {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)} — tez orada...
