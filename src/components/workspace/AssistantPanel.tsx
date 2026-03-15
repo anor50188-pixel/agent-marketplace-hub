@@ -26,20 +26,20 @@ function generateResponse(input: string, state: WorkspaceState): string {
   const toolLabels = state.selectedTools.map((id) => toolNames[id] || id);
 
   if (q.includes("tool") || q.includes("qanday")) {
-    if (state.selectedTools.length === 0) return "Hozircha hech qanday tool tanlanmagan. Explorer panelidan 'Tools' bo'limiga o'ting va kerakli toollarni tanlang.";
-    return `Tanlangan toollar: ${toolLabels.join(", ")}. Har bir tool kartochkasidagi 'Register' linkidan API kalitini olishingiz mumkin.`;
+    if (state.selectedTools.length === 0) return "Hozircha hech qanday tool tanlanmagan. Chap paneldan 'Toollar' bo'limiga o'ting va kerakli toollarni tanlang.";
+    return `Tanlangan toollar: ${toolLabels.join(", ")}. Har bir tool kartochkasidagi 'Ro'yxatdan o'tish' linkidan API kalitini olishingiz mumkin.`;
   }
   if (q.includes("status") || q.includes("holat")) {
     const issues: string[] = [];
     if (!state.agentName.trim()) issues.push("Agent nomi kiritilmagan");
     if (state.selectedTools.length === 0) issues.push("Tool tanlanmagan");
-    if (issues.length === 0) return `✅ "${state.agentName}" — barcha sozlamalar tayyor. Deploy qilishingiz mumkin!`;
+    if (issues.length === 0) return `✅ "${state.agentName}" — barcha sozlamalar tayyor. Marketga joylashtirishingiz mumkin!`;
     return `⚠️ Muammolar:\n${issues.map((i) => `• ${i}`).join("\n")}`;
   }
-  if (q.includes("deploy") || q.includes("ishga")) {
+  if (q.includes("deploy") || q.includes("ishga") || q.includes("joylashtir")) {
     if (!state.agentName.trim() || state.selectedTools.length === 0)
-      return "Deploy qilish uchun kamida agent nomi va 1 ta tool tanlangan bo'lishi kerak.";
-    return "Yuqori o'ng burchakdagi 'Deploy to Marketplace' tugmasini bosing!";
+      return "Joylashtirish uchun kamida agent nomi va 1 ta tool tanlangan bo'lishi kerak.";
+    return "Yuqori o'ng burchakdagi 'Marketga joylashtirish' tugmasini bosing!";
   }
   if (q.includes("model") || q.includes("temperature")) {
     return `Hozirgi model: ${state.modelSettings.model === "minimax" ? "MiniMax" : "GPT-4o"}, Temperature: ${state.modelSettings.temperature}, Max tokens: ${state.modelSettings.maxTokens}. Explorer → Model Settings dan o'zgartiring.`;
