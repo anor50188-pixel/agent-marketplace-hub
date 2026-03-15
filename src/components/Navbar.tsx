@@ -1,5 +1,7 @@
-import { Bot, Menu } from "lucide-react";
+import { Bot, Menu, LogOut } from "lucide-react";
 import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -10,6 +12,8 @@ const navLinks = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   const scrollTo = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -43,9 +47,18 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <button className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold">
-            Kirish
-          </button>
+          {user ? (
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-muted-foreground">{user.email?.split("@")[0]}</span>
+              <button onClick={signOut} className="text-muted-foreground hover:text-foreground transition-colors">
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <button onClick={() => navigate("/auth")} className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold">
+              Kirish
+            </button>
+          )}
         </div>
 
         <button className="md:hidden text-foreground" onClick={() => setMenuOpen(!menuOpen)}>
@@ -72,9 +85,15 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
-              <button className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold w-full">
-                Kirish
-              </button>
+              {user ? (
+                <button onClick={signOut} className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold w-full">
+                  Chiqish
+                </button>
+              ) : (
+                <button onClick={() => navigate("/auth")} className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold w-full">
+                  Kirish
+                </button>
+              )}
             </div>
           </motion.div>
         )}
