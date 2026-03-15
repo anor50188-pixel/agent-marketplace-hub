@@ -62,8 +62,8 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
             {state.activeNode === "info" && (
               <div className="max-w-lg space-y-5">
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-1">Agent Identity</h2>
-                  <p className="text-sm text-slate-400">Define your agent's core identity and purpose.</p>
+                <h2 className="text-xl font-bold text-white mb-1">Agent haqida</h2>
+                  <p className="text-sm text-slate-400">Agentingiz nomi va vazifasini belgilang.</p>
                 </div>
                 <div className="space-y-4">
                   <div className="space-y-2">
