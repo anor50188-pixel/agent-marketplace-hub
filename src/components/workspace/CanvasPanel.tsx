@@ -76,7 +76,7 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-sm text-slate-300">Description</Label>
+                    <Label className="text-sm text-slate-300">Tavsif</Label>
                     <textarea
                       value={state.agentDescription}
                       onChange={(e) => onUpdate({ agentDescription: e.target.value })}
