@@ -73,7 +73,7 @@ const AgentBuilderWizard = () => {
   };
 
   const canNext = () => {
-    if (currentStep === 1) return agentName.trim() && agentDescription.trim() && category;
+    if (currentStep === 1) return agentName.trim() && agentDescription.trim();
     if (currentStep === 2) return selectedTools.length > 0;
     return true;
   };
