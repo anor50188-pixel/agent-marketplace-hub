@@ -54,7 +54,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section id="testimonials" className="relative py-24 overflow-hidden scroll-mt-20">
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[300px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">

@@ -14,7 +14,7 @@ const PricingSection = ({ onOpenDashboard }: PricingSectionProps) => {
   const planIcons = [Zap, Sparkles, Crown];
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section id="pricing" className="relative py-24 overflow-hidden scroll-mt-20">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-secondary/4 blur-[140px] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
