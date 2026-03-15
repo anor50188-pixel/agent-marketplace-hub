@@ -20,7 +20,7 @@ const ExplorerPanel = ({ activeNode, onNodeSelect, selectedToolCount }: Explorer
   return (
     <div className="w-56 h-full border-r border-white/10 bg-white/[0.03] backdrop-blur-xl flex flex-col">
       <div className="px-4 py-4">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-semibold">Explorer</p>
+        <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-semibold">Boshqaruv</p>
       </div>
       <nav className="flex-1 px-2 space-y-0.5">
         {nodes.map((node) => {
