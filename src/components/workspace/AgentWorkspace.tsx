@@ -63,7 +63,7 @@ const AgentWorkspace = () => {
           <Input
             value={state.agentName}
             onChange={(e) => update({ agentName: e.target.value })}
-            placeholder="Untitled Agent"
+            placeholder="Nomsiz Agent"
             className="bg-transparent border-none text-lg font-semibold text-slate-100 placeholder:text-slate-500 focus-visible:ring-0 focus-visible:ring-offset-0 w-64 h-9 px-0"
           />
         </div>
