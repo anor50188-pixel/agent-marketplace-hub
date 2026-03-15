@@ -135,7 +135,7 @@ let currentLang: Lang = "uz";
 let langListeners: (() => void)[] = [];
 
 // Stable snapshot for useSyncExternalStore
-let snapshot = { lang: currentLang };
+let snapshot: { lang: Lang } = { lang: currentLang };
 
 export const i18nStore = {
   getLang: () => currentLang,
