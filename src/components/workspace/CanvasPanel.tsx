@@ -92,8 +92,8 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
             {state.activeNode === "knowledge" && (
               <div className="max-w-lg space-y-5">
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-1">Knowledge Base</h2>
-                  <p className="text-sm text-slate-400">Upload documents to give your agent domain expertise.</p>
+                <h2 className="text-xl font-bold text-white mb-1">Bilimlar bazasi</h2>
+                  <p className="text-sm text-slate-400">Agentga bilim berish uchun hujjatlarni yuklang.</p>
                 </div>
                 <div className="border-2 border-dashed border-white/10 rounded-xl p-10 flex flex-col items-center justify-center text-center">
                   <Database className="w-10 h-10 text-slate-600 mb-3" />
