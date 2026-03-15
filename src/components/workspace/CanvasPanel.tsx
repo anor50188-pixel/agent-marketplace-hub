@@ -106,8 +106,8 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
             {state.activeNode === "tools" && (
               <div className="space-y-5">
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-1">Power Tools</h2>
-                  <p className="text-sm text-slate-400">Select tools and register on their platforms to get API access.</p>
+                <h2 className="text-xl font-bold text-white mb-1">Toollar</h2>
+                  <p className="text-sm text-slate-400">Toollarni tanlang va rasmiy saytlarida ro'yxatdan o'ting.</p>
                 </div>
                 <ToolPowerCards
                   selectedTools={state.selectedTools}
