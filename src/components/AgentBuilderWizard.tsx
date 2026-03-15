@@ -36,13 +36,6 @@ const steps = [
   { id: 4, label: "Yaratish", icon: Rocket },
 ];
 
-const categories = [
-  { value: "marketing", label: "Marketing" },
-  { value: "programming", label: "Programming" },
-  { value: "research", label: "Research" },
-  { value: "business", label: "Business" },
-  { value: "content", label: "Content" },
-];
 
 interface Tool {
   id: string;
