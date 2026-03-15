@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, User, Sparkles, Wand2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { agentStore, type AgentConfig } from "@/lib/agentStore";
+import { subscriptionStore } from "@/lib/subscriptionStore";
 import { toast } from "@/hooks/use-toast";
 
 interface Message {
