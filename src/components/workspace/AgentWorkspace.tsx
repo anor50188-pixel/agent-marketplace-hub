@@ -63,7 +63,7 @@ const AgentWorkspace = () => {
           <Input
             value={state.agentName}
             onChange={(e) => update({ agentName: e.target.value })}
-            placeholder="Nomsiz Agent"
+            placeholder="Untitled Agent"
             className="bg-transparent border-none text-lg font-semibold text-slate-100 placeholder:text-slate-500 focus-visible:ring-0 focus-visible:ring-offset-0 w-64 h-9 px-0"
           />
         </div>
@@ -73,11 +73,11 @@ const AgentWorkspace = () => {
           className="h-9 px-5 text-sm font-semibold rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white border-0 shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] disabled:opacity-40 disabled:shadow-none transition-all gap-2"
         >
           {deploying ? (
-            <><Loader2 className="w-4 h-4 animate-spin" /> Joylashtirilmoqda...</>
+            <><Loader2 className="w-4 h-4 animate-spin" /> Deploying...</>
           ) : deployed ? (
-            "✓ Joylashtirildi"
+            "✓ Deployed"
           ) : (
-            <><Rocket className="w-4 h-4" /> Marketga joylashtirish</>
+            <><Rocket className="w-4 h-4" /> Deploy to Marketplace</>
           )}
         </Button>
       </motion.div>

@@ -26,25 +26,25 @@ function generateResponse(input: string, state: WorkspaceState): string {
   const toolLabels = state.selectedTools.map((id) => toolNames[id] || id);
 
   if (q.includes("tool") || q.includes("qanday")) {
-    if (state.selectedTools.length === 0) return "Hozircha hech qanday tool tanlanmagan. Chap paneldan 'Toollar' bo'limiga o'ting va kerakli toollarni tanlang.";
-    return `Tanlangan toollar: ${toolLabels.join(", ")}. Har bir tool kartochkasidagi 'Ro'yxatdan o'tish' linkidan API kalitini olishingiz mumkin.`;
+    if (state.selectedTools.length === 0) return "Hozircha hech qanday tool tanlanmagan. Explorer panelidan 'Tools' bo'limiga o'ting va kerakli toollarni tanlang.";
+    return `Tanlangan toollar: ${toolLabels.join(", ")}. Har bir tool kartochkasidagi 'Register' linkidan API kalitini olishingiz mumkin.`;
   }
   if (q.includes("status") || q.includes("holat")) {
     const issues: string[] = [];
     if (!state.agentName.trim()) issues.push("Agent nomi kiritilmagan");
     if (state.selectedTools.length === 0) issues.push("Tool tanlanmagan");
-    if (issues.length === 0) return `✅ "${state.agentName}" — barcha sozlamalar tayyor. Marketga joylashtirishingiz mumkin!`;
+    if (issues.length === 0) return `✅ "${state.agentName}" — barcha sozlamalar tayyor. Deploy qilishingiz mumkin!`;
     return `⚠️ Muammolar:\n${issues.map((i) => `• ${i}`).join("\n")}`;
   }
-  if (q.includes("deploy") || q.includes("ishga") || q.includes("joylashtir")) {
+  if (q.includes("deploy") || q.includes("ishga")) {
     if (!state.agentName.trim() || state.selectedTools.length === 0)
-      return "Joylashtirish uchun kamida agent nomi va 1 ta tool tanlangan bo'lishi kerak.";
-    return "Yuqori o'ng burchakdagi 'Marketga joylashtirish' tugmasini bosing!";
+      return "Deploy qilish uchun kamida agent nomi va 1 ta tool tanlangan bo'lishi kerak.";
+    return "Yuqori o'ng burchakdagi 'Deploy to Marketplace' tugmasini bosing!";
   }
   if (q.includes("model") || q.includes("temperature")) {
-    return `Hozirgi model: ${state.modelSettings.model === "minimax" ? "MiniMax" : "GPT-4o"}, Harorat: ${state.modelSettings.temperature}, Maks tokenlar: ${state.modelSettings.maxTokens}. Chap panel → Model sozlamalari dan o'zgartiring.`;
+    return `Hozirgi model: ${state.modelSettings.model === "minimax" ? "MiniMax" : "GPT-4o"}, Temperature: ${state.modelSettings.temperature}, Max tokens: ${state.modelSettings.maxTokens}. Explorer → Model Settings dan o'zgartiring.`;
   }
-  return `"${state.agentName || "Agent"}" uchun yordam beraman. Tool tanlash, model sozlash yoki joylashtirish haqida so'rang.`;
+  return `"${state.agentName || "Agent"}" uchun yordam beraman. Tool tanlash, model sozlash yoki deploy haqida so'rang.`;
 }
 
 interface AssistantPanelProps {
@@ -53,7 +53,7 @@ interface AssistantPanelProps {
 
 const AssistantPanel = ({ state }: AssistantPanelProps) => {
   const [messages, setMessages] = useState<Message[]>([
-    { id: "1", role: "assistant" as const, content: "Salom! Men ASER AI yordamchisiman. Agent yaratishda sizga yordam beraman. 🤖" },
+    { id: "1", role: "assistant", content: "Salom! Men ASER AI yordamchisiman. Agent yaratishda sizga yordam beraman. 🤖" },
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -107,7 +107,7 @@ const AssistantPanel = ({ state }: AssistantPanelProps) => {
       {/* Chat Header */}
       <div className="h-10 shrink-0 flex items-center gap-2 px-4 border-b border-white/10">
         <Bot className="w-4 h-4 text-purple-400" />
-        <span className="text-xs font-semibold text-slate-300">AI Yordamchi</span>
+        <span className="text-xs font-semibold text-slate-300">AI Assistant</span>
       </div>
 
       {/* Chat Messages */}
@@ -153,7 +153,7 @@ const AssistantPanel = ({ state }: AssistantPanelProps) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            placeholder="Savolingizni yozing..."
+            placeholder="Ask anything..."
             className="h-8 text-xs bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus-visible:ring-purple-500/50"
           />
           <Button
@@ -171,11 +171,11 @@ const AssistantPanel = ({ state }: AssistantPanelProps) => {
       <div className="flex-[2] border-t border-white/10 flex flex-col">
         <div className="h-8 shrink-0 flex items-center gap-2 px-4 border-b border-white/5 bg-white/[0.02]">
           <Terminal className="w-3.5 h-3.5 text-emerald-400" />
-          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Sinov maydoni</span>
+          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Sandbox</span>
         </div>
         <div className="flex-1 overflow-auto p-3">
           <pre className="text-[11px] font-mono text-slate-400 whitespace-pre-wrap leading-relaxed">
-            {sandboxOutput || "// Agentni shu yerda sinab ko'ring..."}
+            {sandboxOutput || "// Test your agent here..."}
           </pre>
         </div>
         <div className="px-3 pb-3">
@@ -184,7 +184,7 @@ const AssistantPanel = ({ state }: AssistantPanelProps) => {
               value={sandboxInput}
               onChange={(e) => setSandboxInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && runSandbox()}
-              placeholder="Sinov so'rovi..."
+              placeholder="Test prompt..."
               className="h-8 text-xs font-mono bg-white/5 border-white/10 text-emerald-300 placeholder:text-slate-600 focus-visible:ring-emerald-500/50"
             />
             <Button

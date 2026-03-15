@@ -9,18 +9,18 @@ interface ExplorerPanelProps {
 }
 
 const nodes: { id: ActiveNode; label: string; icon: React.ElementType }[] = [
-  { id: "info", label: "Agent ma'lumotlari", icon: FileText },
-  { id: "knowledge", label: "Bilimlar bazasi", icon: Database },
-  { id: "tools", label: "Toollar", icon: Wrench },
-  { id: "model", label: "Model sozlamalari", icon: Settings },
-  { id: "output", label: "Chiqish kanallari", icon: Monitor },
+  { id: "info", label: "Agent Info", icon: FileText },
+  { id: "knowledge", label: "Knowledge Base", icon: Database },
+  { id: "tools", label: "Tools", icon: Wrench },
+  { id: "model", label: "Model Settings", icon: Settings },
+  { id: "output", label: "Output", icon: Monitor },
 ];
 
 const ExplorerPanel = ({ activeNode, onNodeSelect, selectedToolCount }: ExplorerPanelProps) => {
   return (
     <div className="w-56 h-full border-r border-white/10 bg-white/[0.03] backdrop-blur-xl flex flex-col">
       <div className="px-4 py-4">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-semibold">Boshqaruv</p>
+        <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-semibold">Explorer</p>
       </div>
       <nav className="flex-1 px-2 space-y-0.5">
         {nodes.map((node) => {
@@ -55,7 +55,7 @@ const ExplorerPanel = ({ activeNode, onNodeSelect, selectedToolCount }: Explorer
       <div className="p-4 border-t border-white/5">
         <div className="flex items-center gap-2 text-[11px] text-slate-500">
           <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Avtomatik saqlash
+          Auto-saving
         </div>
       </div>
     </div>

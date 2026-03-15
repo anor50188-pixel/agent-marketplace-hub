@@ -13,11 +13,11 @@ interface CanvasPanelProps {
 }
 
 const sectionMeta: Record<string, { label: string; icon: React.ElementType }> = {
-  info: { label: "Agent ma'lumotlari", icon: FileText },
-  knowledge: { label: "Bilimlar bazasi", icon: Database },
-  tools: { label: "Toollar", icon: Wrench },
-  model: { label: "Model sozlamalari", icon: Settings },
-  output: { label: "Chiqish kanallari", icon: Monitor },
+  info: { label: "Agent Info", icon: FileText },
+  knowledge: { label: "Knowledge Base", icon: Database },
+  tools: { label: "Tools", icon: Wrench },
+  model: { label: "Model Settings", icon: Settings },
+  output: { label: "Output", icon: Monitor },
 };
 
 const pageVariants = {
@@ -62,25 +62,25 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
             {state.activeNode === "info" && (
               <div className="max-w-lg space-y-5">
                 <div>
-                <h2 className="text-xl font-bold text-white mb-1">Agent haqida</h2>
-                  <p className="text-sm text-slate-400">Agentingiz nomi va vazifasini belgilang.</p>
+                  <h2 className="text-xl font-bold text-white mb-1">Agent Identity</h2>
+                  <p className="text-sm text-slate-400">Define your agent's core identity and purpose.</p>
                 </div>
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label className="text-sm text-slate-300">Nomi</Label>
+                    <Label className="text-sm text-slate-300">Name</Label>
                     <Input
                       value={state.agentName}
                       onChange={(e) => onUpdate({ agentName: e.target.value })}
-                      placeholder="Masalan: Marketing Trend Hunter"
+                      placeholder="e.g. Marketing Trend Hunter"
                       className="h-11 bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus-visible:ring-purple-500/50"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-sm text-slate-300">Tavsif</Label>
+                    <Label className="text-sm text-slate-300">Description</Label>
                     <textarea
                       value={state.agentDescription}
                       onChange={(e) => onUpdate({ agentDescription: e.target.value })}
-                      placeholder="Agent nima vazifani bajaradi?"
+                      placeholder="What does this agent do?"
                       rows={4}
                       className="w-full rounded-md bg-white/5 border border-white/10 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none"
                     />
@@ -92,13 +92,13 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
             {state.activeNode === "knowledge" && (
               <div className="max-w-lg space-y-5">
                 <div>
-                <h2 className="text-xl font-bold text-white mb-1">Bilimlar bazasi</h2>
-                  <p className="text-sm text-slate-400">Agentga bilim berish uchun hujjatlarni yuklang.</p>
+                  <h2 className="text-xl font-bold text-white mb-1">Knowledge Base</h2>
+                  <p className="text-sm text-slate-400">Upload documents to give your agent domain expertise.</p>
                 </div>
                 <div className="border-2 border-dashed border-white/10 rounded-xl p-10 flex flex-col items-center justify-center text-center">
                   <Database className="w-10 h-10 text-slate-600 mb-3" />
-                  <p className="text-sm text-slate-400 font-medium">Fayllarni shu yerga tashlang yoki bosing</p>
-                  <p className="text-xs text-slate-500 mt-1">PDF, CSV, TXT — tez kunda</p>
+                  <p className="text-sm text-slate-400 font-medium">Drop files here or click to upload</p>
+                  <p className="text-xs text-slate-500 mt-1">PDF, CSV, TXT — coming soon</p>
                 </div>
               </div>
             )}
@@ -106,8 +106,8 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
             {state.activeNode === "tools" && (
               <div className="space-y-5">
                 <div>
-                <h2 className="text-xl font-bold text-white mb-1">Toollar</h2>
-                  <p className="text-sm text-slate-400">Toollarni tanlang va rasmiy saytlarida ro'yxatdan o'ting.</p>
+                  <h2 className="text-xl font-bold text-white mb-1">Power Tools</h2>
+                  <p className="text-sm text-slate-400">Select tools and register on their platforms to get API access.</p>
                 </div>
                 <ToolPowerCards
                   selectedTools={state.selectedTools}
@@ -124,16 +124,16 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
             {state.activeNode === "model" && (
               <div className="max-w-lg space-y-6">
                 <div>
-                <h2 className="text-xl font-bold text-white mb-1">Model sozlamalari</h2>
-                  <p className="text-sm text-slate-400">Agent miyasini boshqaradigan AI modelni sozlang.</p>
+                  <h2 className="text-xl font-bold text-white mb-1">Model Configuration</h2>
+                  <p className="text-sm text-slate-400">Fine-tune the AI brain that powers your agent.</p>
                 </div>
                 <div className="space-y-5">
                   <div className="space-y-2">
-                    <Label className="text-sm text-slate-300">AI modeli</Label>
+                    <Label className="text-sm text-slate-300">AI Model</Label>
                     <div className="grid grid-cols-2 gap-2">
                       {[
-                        { id: "minimax", name: "MiniMax", desc: "Tez va samarali" },
-                        { id: "gpt4", name: "GPT-4o", desc: "Eng kuchli" },
+                        { id: "minimax", name: "MiniMax", desc: "Fast & efficient" },
+                        { id: "gpt4", name: "GPT-4o", desc: "Most capable" },
                       ].map((m) => (
                         <button
                           key={m.id}
@@ -152,7 +152,6 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-
                       <Label className="text-sm text-slate-300">Temperature</Label>
                       <span className="text-xs font-mono text-purple-300">{state.modelSettings.temperature}</span>
                     </div>
@@ -166,7 +165,7 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-sm text-slate-300">Maksimal tokenlar</Label>
+                    <Label className="text-sm text-slate-300">Max Tokens</Label>
                     <Input
                       type="number"
                       value={state.modelSettings.maxTokens}
@@ -181,15 +180,15 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
             {state.activeNode === "output" && (
               <div className="max-w-lg space-y-5">
                 <div>
-                <h2 className="text-xl font-bold text-white mb-1">Chiqish kanallari</h2>
-                  <p className="text-sm text-slate-400">Agent natijalarini qayerga yuborishini tanlang.</p>
+                  <h2 className="text-xl font-bold text-white mb-1">Output Channels</h2>
+                  <p className="text-sm text-slate-400">Choose where your agent delivers results.</p>
                 </div>
                 <div className="space-y-3">
                   {[
-                    { id: "dashboard", name: "Jonli dashboard", desc: "Vizual tahlil paneli" },
-                    { id: "telegram", name: "Telegram bot", desc: "Natijalarni Telegramga yuborish" },
-                    { id: "email", name: "Email hisobotlar", desc: "Rejalashtirilgan email xabarlar" },
-                    { id: "webhook", name: "Webhook", desc: "Natijalarni istalgan URL ga yuborish" },
+                    { id: "dashboard", name: "Live Dashboard", desc: "Visual analytics dashboard" },
+                    { id: "telegram", name: "Telegram Bot", desc: "Send results to Telegram" },
+                    { id: "email", name: "Email Reports", desc: "Scheduled email digests" },
+                    { id: "webhook", name: "Webhook", desc: "POST results to any URL" },
                   ].map((ch) => (
                     <div
                       key={ch.id}
