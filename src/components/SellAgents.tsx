@@ -14,8 +14,9 @@ const MIN_PRICE = 5;
 const COMMISSION = 0.2;
 const TEST_DAYS_REQUIRED = 10;
 
-const SellAgents = () => {
+const SellAgents = ({ onSectionChange }: { onSectionChange?: (id: string) => void }) => {
   const agents = useSyncExternalStore(agentStore.subscribe, agentStore.getAgents);
+  const canSell = subscriptionStore.canSellAgents();
   const [selectedAgentId, setSelectedAgentId] = useState<string | null>(null);
   const [step, setStep] = useState<"select" | "configure" | "review">("select");
 
