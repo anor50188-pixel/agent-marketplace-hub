@@ -166,7 +166,7 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-sm text-slate-300">Max Tokens</Label>
+                    <Label className="text-sm text-slate-300">Maksimal tokenlar</Label>
                     <Input
                       type="number"
                       value={state.modelSettings.maxTokens}
