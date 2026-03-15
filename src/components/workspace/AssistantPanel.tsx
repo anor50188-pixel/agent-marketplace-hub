@@ -171,7 +171,7 @@ const AssistantPanel = ({ state }: AssistantPanelProps) => {
       <div className="flex-[2] border-t border-white/10 flex flex-col">
         <div className="h-8 shrink-0 flex items-center gap-2 px-4 border-b border-white/5 bg-white/[0.02]">
           <Terminal className="w-3.5 h-3.5 text-emerald-400" />
-          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Sandbox</span>
+          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Sinov maydoni</span>
         </div>
         <div className="flex-1 overflow-auto p-3">
           <pre className="text-[11px] font-mono text-slate-400 whitespace-pre-wrap leading-relaxed">
