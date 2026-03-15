@@ -80,7 +80,7 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                     <textarea
                       value={state.agentDescription}
                       onChange={(e) => onUpdate({ agentDescription: e.target.value })}
-                      placeholder="What does this agent do?"
+                      placeholder="Agent nima vazifani bajaradi?"
                       rows={4}
                       className="w-full rounded-md bg-white/5 border border-white/10 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none"
                     />
