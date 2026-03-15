@@ -71,7 +71,7 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                     <Input
                       value={state.agentName}
                       onChange={(e) => onUpdate({ agentName: e.target.value })}
-                      placeholder="e.g. Marketing Trend Hunter"
+                      placeholder="Masalan: Marketing Trend Hunter"
                       className="h-11 bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus-visible:ring-purple-500/50"
                     />
                   </div>
