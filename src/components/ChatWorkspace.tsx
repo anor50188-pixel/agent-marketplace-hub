@@ -106,6 +106,14 @@ const ChatWorkspace = () => {
   if (!hasMessages) {
     return (
       <div className="flex-1 flex flex-col min-h-0 relative bg-background">
+        {/* Top Toolbar */}
+        <TopToolbar
+          tools={workspaceTools}
+          activeTools={activeTools}
+          onToolClick={handleToolClick}
+          isToolUnlocked={isToolUnlocked}
+        />
+
         {/* Centered content */}
         <div className="flex-1 flex flex-col items-center justify-center px-6">
           {/* Gradient glow behind heading */}
@@ -169,14 +177,6 @@ const ChatWorkspace = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* Bottom Tool Dock */}
-        <ToolDock
-          tools={workspaceTools}
-          activeTools={activeTools}
-          onToolClick={handleToolClick}
-          isToolUnlocked={isToolUnlocked}
-        />
       </div>
     );
   }
