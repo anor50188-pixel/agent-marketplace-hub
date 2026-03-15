@@ -53,7 +53,7 @@ interface AssistantPanelProps {
 
 const AssistantPanel = ({ state }: AssistantPanelProps) => {
   const [messages, setMessages] = useState<Message[]>([
-    { id: "1", role: "assistant", content: "Salom! Men ASER AI yordamchisiman. Agent yaratishda sizga yordam beraman. 🤖" },
+    { id: "1", role: "assistant" as const, content: "Salom! Men ASER AI yordamchisiman. Agent yaratishda sizga yordam beraman. 🤖" },
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
