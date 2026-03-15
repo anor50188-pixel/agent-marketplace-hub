@@ -55,7 +55,7 @@ const ExplorerPanel = ({ activeNode, onNodeSelect, selectedToolCount }: Explorer
       <div className="p-4 border-t border-white/5">
         <div className="flex items-center gap-2 text-[11px] text-slate-500">
           <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          Auto-saving
+          Avtomatik saqlash
         </div>
       </div>
     </div>

@@ -186,10 +186,10 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                 </div>
                 <div className="space-y-3">
                   {[
-                    { id: "dashboard", name: "Live Dashboard", desc: "Visual analytics dashboard" },
-                    { id: "telegram", name: "Telegram Bot", desc: "Send results to Telegram" },
-                    { id: "email", name: "Email Reports", desc: "Scheduled email digests" },
-                    { id: "webhook", name: "Webhook", desc: "POST results to any URL" },
+                    { id: "dashboard", name: "Jonli dashboard", desc: "Vizual tahlil paneli" },
+                    { id: "telegram", name: "Telegram bot", desc: "Natijalarni Telegramga yuborish" },
+                    { id: "email", name: "Email hisobotlar", desc: "Rejalashtirilgan email xabarlar" },
+                    { id: "webhook", name: "Webhook", desc: "Natijalarni istalgan URL ga yuborish" },
                   ].map((ch) => (
                     <div
                       key={ch.id}

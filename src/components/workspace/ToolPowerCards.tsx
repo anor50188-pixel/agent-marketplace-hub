@@ -73,7 +73,7 @@ const ToolPowerCards = ({ selectedTools, onToggle }: ToolPowerCardsProps) => {
                 style={{ color: tool.brandColor }}
               >
                 <ExternalLink className="w-3 h-3" />
-                Register & Get API Key
+                Ro'yxatdan o'tish
               </a>
             )}
           </motion.button>

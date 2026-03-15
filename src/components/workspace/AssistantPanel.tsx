@@ -184,7 +184,7 @@ const AssistantPanel = ({ state }: AssistantPanelProps) => {
               value={sandboxInput}
               onChange={(e) => setSandboxInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && runSandbox()}
-              placeholder="Test prompt..."
+              placeholder="Sinov so'rovi..."
               className="h-8 text-xs font-mono bg-white/5 border-white/10 text-emerald-300 placeholder:text-slate-600 focus-visible:ring-emerald-500/50"
             />
             <Button
