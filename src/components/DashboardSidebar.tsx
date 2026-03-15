@@ -71,10 +71,10 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
       {/* Navigation */}
       <nav className="flex-1 px-2 py-3 space-y-4 overflow-auto">
         {menuGroups.map((group, gi) => (
-          <div key={group.label || gi}>
-            {group.label && (
+          <div key={group.labelKey || gi}>
+            {group.labelKey && (
               <p className="px-3 mb-1.5 text-[10px] font-semibold text-sidebar-foreground/30 uppercase tracking-widest">
-                {group.label}
+                {t(group.labelKey)}
               </p>
             )}
             <div className="space-y-0.5">
@@ -92,7 +92,7 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
                   }`}
                 >
                   <item.icon className="w-4 h-4 shrink-0" />
-                  {item.label}
+                  {t(item.labelKey)}
                 </motion.button>
               ))}
             </div>
