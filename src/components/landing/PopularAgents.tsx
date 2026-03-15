@@ -23,7 +23,7 @@ const PopularAgents = ({ onOpenDashboard }: PopularAgentsProps) => {
     .slice(0, 4);
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section id="marketplace" className="relative py-24 overflow-hidden scroll-mt-20">
       {/* Background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
 
