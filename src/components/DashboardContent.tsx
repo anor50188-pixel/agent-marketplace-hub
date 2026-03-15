@@ -3,6 +3,7 @@ import AppsSection from "./AppsSection";
 import AgentCreatorChat from "./AgentCreatorChat";
 import MyAgents from "./MyAgents";
 import IntegrationsSection from "./IntegrationsSection";
+import AgentTemplates from "./AgentTemplates";
 
 interface DashboardContentProps {
   activeSection: string;
