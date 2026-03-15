@@ -17,7 +17,7 @@ const Dashboard = ({ onClose }: DashboardProps) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed inset-0 z-50 bg-background/80 backdrop-blur-xl flex"
+      className="fixed inset-0 z-50 bg-background/80 backdrop-blur-xl flex dark"
     >
       <DashboardSidebar
         activeSection={activeSection}
