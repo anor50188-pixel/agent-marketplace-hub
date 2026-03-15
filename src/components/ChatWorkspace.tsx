@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, User, X, Sparkles, Plus, MonitorSmartphone, Mic, ArrowUp } from "lucide-react";
-import ToolDock from "./ToolDock";
+import TopToolbar from "./TopToolbar";
 import { toast } from "@/hooks/use-toast";
 
 interface Message {
