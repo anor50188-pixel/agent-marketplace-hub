@@ -7,10 +7,13 @@ import AgentTemplates from "./AgentTemplates";
 import Marketplace from "./Marketplace";
 import SellAgents from "./SellAgents";
 import Statistics from "./Statistics";
+import Subscriptions from "./Subscriptions";
 
 interface DashboardContentProps {
   activeSection: string;
 }
+
+const SECTIONS = ["create", "my-agents", "apps", "templates", "integrations", "marketplace", "sell", "analytics", "subscriptions"];
 
 const DashboardContent = ({ activeSection }: DashboardContentProps) => {
   return (
@@ -23,7 +26,8 @@ const DashboardContent = ({ activeSection }: DashboardContentProps) => {
       {activeSection === "marketplace" && <Marketplace />}
       {activeSection === "sell" && <SellAgents />}
       {activeSection === "analytics" && <Statistics />}
-      {!["create", "my-agents", "apps", "templates", "integrations", "marketplace", "sell", "analytics"].includes(activeSection) && (
+      {activeSection === "subscriptions" && <Subscriptions />}
+      {!SECTIONS.includes(activeSection) && (
         <div className="flex-1 flex items-center justify-center">
           <p className="text-muted-foreground text-sm">
             {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)} — tez orada...

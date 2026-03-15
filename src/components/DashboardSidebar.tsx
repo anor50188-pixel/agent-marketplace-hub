@@ -1,5 +1,7 @@
+import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
-import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown, Store } from "lucide-react";
+import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown, Store, Crown } from "lucide-react";
+import { subscriptionStore, PLANS } from "@/lib/subscriptionStore";
 
 const menuGroups = [
   {
@@ -22,6 +24,7 @@ const menuGroups = [
     items: [
       { id: "marketplace", label: "Marketplace", icon: ShoppingBag },
       { id: "analytics", label: "Statistika", icon: BarChart3 },
+      { id: "subscriptions", label: "Obuna", icon: Crown },
       { id: "settings", label: "Sozlamalar", icon: Settings },
     ],
   },
@@ -34,6 +37,9 @@ interface DashboardSidebarProps {
 }
 
 const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: DashboardSidebarProps) => {
+  const currentPlan = useSyncExternalStore(subscriptionStore.subscribe, subscriptionStore.getPlan);
+  const planConfig = PLANS.find((p) => p.id === currentPlan)!;
+
   return (
     <motion.aside
       initial={{ x: -40, opacity: 0 }}
@@ -94,16 +100,26 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
 
       {/* Footer */}
       <div className="p-3 border-t border-sidebar-border">
-        <div className="flex items-center gap-2.5 px-2 py-2">
+        <button
+          onClick={() => onSectionChange("subscriptions")}
+          className="w-full flex items-center gap-2.5 px-2 py-2 rounded-lg hover:bg-sidebar-accent transition-colors"
+        >
           <div className="w-8 h-8 rounded-full gradient-btn flex items-center justify-center text-[11px] font-bold text-primary-foreground">
             U
           </div>
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 text-left">
             <p className="text-[12px] font-medium text-sidebar-foreground truncate">User</p>
-            <p className="text-[11px] text-sidebar-foreground/35 truncate">Free plan</p>
+            <p className={`text-[11px] truncate font-medium ${
+              currentPlan === "free" ? "text-sidebar-foreground/35" :
+              currentPlan === "pro" ? "text-primary" : "text-secondary"
+            }`}>
+              {planConfig.name} plan
+            </p>
           </div>
-          <Settings className="w-3.5 h-3.5 text-sidebar-foreground/25" />
-        </div>
+          {currentPlan !== "free" && (
+            <Crown className={`w-3.5 h-3.5 ${currentPlan === "pro" ? "text-primary" : "text-secondary"}`} />
+          )}
+        </button>
       </div>
     </motion.aside>
   );
