@@ -8,13 +8,14 @@ import Marketplace from "./Marketplace";
 import SellAgents from "./SellAgents";
 import Statistics from "./Statistics";
 import Subscriptions from "./Subscriptions";
+import Settings from "./Settings";
 
 interface DashboardContentProps {
   activeSection: string;
   onSectionChange: (id: string) => void;
 }
 
-const SECTIONS = ["create", "my-agents", "apps", "templates", "integrations", "marketplace", "sell", "analytics", "subscriptions"];
+const SECTIONS = ["create", "my-agents", "apps", "templates", "integrations", "marketplace", "sell", "analytics", "subscriptions", "settings"];
 
 const DashboardContent = ({ activeSection, onSectionChange }: DashboardContentProps) => {
   return (
@@ -28,6 +29,7 @@ const DashboardContent = ({ activeSection, onSectionChange }: DashboardContentPr
       {activeSection === "sell" && <SellAgents onSectionChange={onSectionChange} />}
       {activeSection === "analytics" && <Statistics onSectionChange={onSectionChange} />}
       {activeSection === "subscriptions" && <Subscriptions />}
+      {activeSection === "settings" && <Settings onSectionChange={onSectionChange} />}
       {!SECTIONS.includes(activeSection) && (
         <div className="flex-1 flex items-center justify-center">
           <p className="text-muted-foreground text-sm">
