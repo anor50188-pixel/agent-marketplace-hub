@@ -1,8 +1,11 @@
+import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { MessageSquare, FileText, Code, Headphones, ShoppingCart, GraduationCap, Bot, TrendingUp } from "lucide-react";
 import { agentStore } from "@/lib/agentStore";
+import { subscriptionStore } from "@/lib/subscriptionStore";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "./ui/button";
+import UpgradePrompt from "./UpgradePrompt";
 
 const templates = [
   {
