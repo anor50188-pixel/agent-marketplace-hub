@@ -1,8 +1,8 @@
-import { useState, useEffect, useSyncExternalStore } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, MoreHorizontal, Play, Pause, Trash2, Clock, Wrench } from "lucide-react";
+import { Bot, Clock } from "lucide-react";
 import { agentStore, type AgentConfig } from "@/lib/agentStore";
-import { toast } from "@/hooks/use-toast";
+import AgentDashboard from "./AgentDashboard";
 
 const TOOL_ICONS: Record<string, string> = {
   "ai-brain": "🧠",
@@ -17,6 +17,11 @@ const TOOL_ICONS: Record<string, string> = {
 
 const MyAgents = () => {
   const agents = useSyncExternalStore(agentStore.subscribe, agentStore.getAgents);
+  const [selectedAgent, setSelectedAgent] = useState<AgentConfig | null>(null);
+
+  if (selectedAgent) {
+    return <AgentDashboard agent={selectedAgent} onBack={() => setSelectedAgent(null)} />;
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-background">
@@ -42,7 +47,12 @@ const MyAgents = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <AnimatePresence>
               {agents.map((agent, i) => (
-                <AgentCard key={agent.id} agent={agent} index={i} />
+                <AgentCard
+                  key={agent.id}
+                  agent={agent}
+                  index={i}
+                  onClick={() => setSelectedAgent(agent)}
+                />
               ))}
             </AnimatePresence>
           </div>
@@ -52,13 +62,22 @@ const MyAgents = () => {
   );
 };
 
-const AgentCard = ({ agent, index }: { agent: AgentConfig; index: number }) => {
+const AgentCard = ({
+  agent,
+  index,
+  onClick,
+}: {
+  agent: AgentConfig;
+  index: number;
+  onClick: () => void;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="rounded-xl border border-border/40 bg-card/50 p-4 hover:border-primary/20 transition-colors"
+      onClick={onClick}
+      className="rounded-xl border border-border/40 bg-card/50 p-4 hover:border-primary/20 transition-colors cursor-pointer"
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
