@@ -67,7 +67,7 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                 </div>
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label className="text-sm text-slate-300">Name</Label>
+                    <Label className="text-sm text-slate-300">Nomi</Label>
                     <Input
                       value={state.agentName}
                       onChange={(e) => onUpdate({ agentName: e.target.value })}
