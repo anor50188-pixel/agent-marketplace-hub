@@ -152,6 +152,7 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
+
                       <Label className="text-sm text-slate-300">Temperature</Label>
                       <span className="text-xs font-mono text-purple-300">{state.modelSettings.temperature}</span>
                     </div>
