@@ -129,7 +129,7 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                 </div>
                 <div className="space-y-5">
                   <div className="space-y-2">
-                    <Label className="text-sm text-slate-300">AI Model</Label>
+                    <Label className="text-sm text-slate-300">AI modeli</Label>
                     <div className="grid grid-cols-2 gap-2">
                       {[
                         { id: "minimax", name: "MiniMax", desc: "Fast & efficient" },
