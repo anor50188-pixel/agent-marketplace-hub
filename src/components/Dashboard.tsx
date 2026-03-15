@@ -24,7 +24,7 @@ const Dashboard = ({ onClose }: DashboardProps) => {
         onSectionChange={setActiveSection}
         onClose={onClose}
       />
-      <DashboardContent activeSection={activeSection} />
+      <DashboardContent activeSection={activeSection} onSectionChange={setActiveSection} />
       <AgentusChat />
     </motion.div>
   );

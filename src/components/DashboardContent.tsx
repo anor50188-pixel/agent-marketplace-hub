@@ -11,21 +11,22 @@ import Subscriptions from "./Subscriptions";
 
 interface DashboardContentProps {
   activeSection: string;
+  onSectionChange: (id: string) => void;
 }
 
 const SECTIONS = ["create", "my-agents", "apps", "templates", "integrations", "marketplace", "sell", "analytics", "subscriptions"];
 
-const DashboardContent = ({ activeSection }: DashboardContentProps) => {
+const DashboardContent = ({ activeSection, onSectionChange }: DashboardContentProps) => {
   return (
     <div className="flex-1 flex flex-col min-w-0 min-h-0">
       {activeSection === "create" && <AgentCreatorChat />}
       {activeSection === "my-agents" && <MyAgents />}
       {activeSection === "apps" && <AppsSection />}
-      {activeSection === "templates" && <AgentTemplates />}
+      {activeSection === "templates" && <AgentTemplates onSectionChange={onSectionChange} />}
       {activeSection === "integrations" && <IntegrationsSection />}
       {activeSection === "marketplace" && <Marketplace />}
-      {activeSection === "sell" && <SellAgents />}
-      {activeSection === "analytics" && <Statistics />}
+      {activeSection === "sell" && <SellAgents onSectionChange={onSectionChange} />}
+      {activeSection === "analytics" && <Statistics onSectionChange={onSectionChange} />}
       {activeSection === "subscriptions" && <Subscriptions />}
       {!SECTIONS.includes(activeSection) && (
         <div className="flex-1 flex items-center justify-center">

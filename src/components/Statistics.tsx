@@ -5,6 +5,8 @@ import {
   Bot, ShoppingCart, Users, BarChart3, ArrowUpRight, Clock, ChevronDown
 } from "lucide-react";
 import { agentStore, type AgentConfig } from "@/lib/agentStore";
+import { subscriptionStore } from "@/lib/subscriptionStore";
+import UpgradePrompt from "./UpgradePrompt";
 
 // Mock seller stats
 const overviewStats = {
@@ -42,13 +44,35 @@ const recentReviews = [
   { buyer: "Otabek J.", agent: "AI Trend Tracker", rating: 5, text: "Pulimga arzidi, tavsiya qilaman.", time: "3 kun oldin" },
 ];
 
-const Statistics = () => {
+const Statistics = ({ onSectionChange }: { onSectionChange?: (id: string) => void }) => {
   const agents = useSyncExternalStore(agentStore.subscribe, agentStore.getAgents);
+  const canUseAnalytics = subscriptionStore.canUseAnalytics();
   const publishedAgents = agents.filter((a) => a.status === "published" || a.totalSales);
   const [period, setPeriod] = useState<"hafta" | "oy" | "yil">("hafta");
 
   const maxSales = Math.max(...weeklyData.map((d) => d.sales));
   const maxViews = Math.max(...weeklyData.map((d) => d.views));
+
+  if (!canUseAnalytics) {
+    return (
+      <div className="flex-1 flex flex-col min-h-0 bg-background">
+        <div className="px-6 pt-8 pb-4">
+          <h1 className="font-display text-2xl font-bold text-foreground mb-1">
+            Marketplace <span className="gradient-text">Statistika</span>
+          </h1>
+          <p className="text-sm text-muted-foreground">Agentlaringiz statistikasi va analitikasi</p>
+        </div>
+        <div className="px-6">
+          <UpgradePrompt
+            title="Statistika uchun Pro reja kerak"
+            description="Batafsil analitika, sotuvlar statistikasi va grafiklarni ko'rish uchun rejangizni yangilang."
+            requiredPlan="Pro"
+            onUpgrade={() => onSectionChange?.("subscriptions")}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-background">

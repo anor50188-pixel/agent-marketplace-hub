@@ -6,14 +6,17 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { agentStore, type AgentConfig } from "@/lib/agentStore";
+import { subscriptionStore } from "@/lib/subscriptionStore";
 import { toast } from "@/hooks/use-toast";
+import UpgradePrompt from "./UpgradePrompt";
 
 const MIN_PRICE = 5;
 const COMMISSION = 0.2;
 const TEST_DAYS_REQUIRED = 10;
 
-const SellAgents = () => {
+const SellAgents = ({ onSectionChange }: { onSectionChange?: (id: string) => void }) => {
   const agents = useSyncExternalStore(agentStore.subscribe, agentStore.getAgents);
+  const canSell = subscriptionStore.canSellAgents();
   const [selectedAgentId, setSelectedAgentId] = useState<string | null>(null);
   const [step, setStep] = useState<"select" | "configure" | "review">("select");
 
@@ -115,6 +118,29 @@ const SellAgents = () => {
   const sellerEarning = Math.round(price * (1 - COMMISSION) * 100) / 100;
 
   // STEP: Select Agent
+  if (!canSell) {
+    return (
+      <div className="flex-1 flex flex-col min-h-0 bg-background">
+        <div className="px-6 pt-8 pb-4">
+          <h1 className="font-display text-2xl font-bold text-foreground mb-1">
+            Agent <span className="gradient-text">Sotish</span>
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Agentlaringizni marketplace'ga qo'yib daromad oling
+          </p>
+        </div>
+        <div className="px-6">
+          <UpgradePrompt
+            title="Agent sotish uchun Pro Max kerak"
+            description="Agentlaringizni marketplace'ga qo'yish va daromad olish uchun Pro Max rejaga o'ting."
+            requiredPlan="Pro Max"
+            onUpgrade={() => onSectionChange?.("subscriptions")}
+          />
+        </div>
+      </div>
+    );
+  }
+
   if (step === "select") {
     return (
       <div className="flex-1 flex flex-col min-h-0 bg-background">
