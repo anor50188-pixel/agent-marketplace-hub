@@ -21,7 +21,7 @@ const menuGroups = [
     items: [
       { id: "marketplace", label: "Marketplace", icon: ShoppingBag },
       { id: "analytics", label: "Statistika", icon: BarChart3 },
-      { id: "conversations", label: "Suhbatlar", icon: MessageSquare },
+      
       { id: "settings", label: "Sozlamalar", icon: Settings },
     ],
   },
