@@ -124,8 +124,8 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
             {state.activeNode === "model" && (
               <div className="max-w-lg space-y-6">
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-1">Model Configuration</h2>
-                  <p className="text-sm text-slate-400">Fine-tune the AI brain that powers your agent.</p>
+                <h2 className="text-xl font-bold text-white mb-1">Model sozlamalari</h2>
+                  <p className="text-sm text-slate-400">Agent miyasini boshqaradigan AI modelni sozlang.</p>
                 </div>
                 <div className="space-y-5">
                   <div className="space-y-2">
