@@ -2,7 +2,10 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import AgentTemplates from "@/components/AgentTemplates";
+import PopularAgents from "@/components/landing/PopularAgents";
+import Testimonials from "@/components/landing/Testimonials";
+import PricingSection from "@/components/landing/PricingSection";
+import LandingFooter from "@/components/landing/LandingFooter";
 import Dashboard from "@/components/Dashboard";
 
 const Index = () => {
@@ -12,7 +15,10 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection onStartClick={() => setShowDashboard(true)} />
-      <AgentTemplates />
+      <PopularAgents onOpenDashboard={() => setShowDashboard(true)} />
+      <Testimonials />
+      <PricingSection onOpenDashboard={() => setShowDashboard(true)} />
+      <LandingFooter />
       <AnimatePresence>
         {showDashboard && <Dashboard onClose={() => setShowDashboard(false)} />}
       </AnimatePresence>
