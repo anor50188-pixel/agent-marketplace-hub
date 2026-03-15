@@ -302,15 +302,9 @@ const AgentBuilderWizard = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-muted/30 p-3">
-                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Kategoriya</p>
-                      <p className="text-sm font-medium text-foreground capitalize">{category}</p>
-                    </div>
-                    <div className="rounded-xl bg-muted/30 p-3">
-                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Toollar</p>
-                      <p className="text-sm font-medium text-foreground">{selectedTools.length} ta tanlangan</p>
-                    </div>
+                  <div className="rounded-xl bg-muted/30 p-3">
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Toollar</p>
+                    <p className="text-sm font-medium text-foreground">{selectedTools.length} ta tanlangan</p>
                   </div>
 
                   <div className="flex flex-wrap gap-1.5">
