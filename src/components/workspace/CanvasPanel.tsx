@@ -97,8 +97,8 @@ const CanvasPanel = ({ state, onUpdate }: CanvasPanelProps) => {
                 </div>
                 <div className="border-2 border-dashed border-white/10 rounded-xl p-10 flex flex-col items-center justify-center text-center">
                   <Database className="w-10 h-10 text-slate-600 mb-3" />
-                  <p className="text-sm text-slate-400 font-medium">Drop files here or click to upload</p>
-                  <p className="text-xs text-slate-500 mt-1">PDF, CSV, TXT — coming soon</p>
+                  <p className="text-sm text-slate-400 font-medium">Fayllarni shu yerga tashlang yoki bosing</p>
+                  <p className="text-xs text-slate-500 mt-1">PDF, CSV, TXT — tez kunda</p>
                 </div>
               </div>
             )}
