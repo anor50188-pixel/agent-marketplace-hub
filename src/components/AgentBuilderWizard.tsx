@@ -368,41 +368,41 @@ const AgentBuilderWizard = () => {
           {steps.map((step, index) => {
             const isActive = currentStep === step.id;
             const isCompleted = currentStep > step.id;
-            return (
-              <div key={step.id} className="flex items-start gap-3">
-                <div className="flex flex-col items-center">
-                  <motion.div
-                    animate={{
-                      scale: isActive ? 1.1 : 1
-                    }}
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                    isCompleted ?
-                    "bg-primary text-primary-foreground" :
-                    isActive ?
-                    "bg-primary/20 text-primary border-2 border-primary/50" :
-                    "bg-muted/50 text-muted-foreground"}`
-                    }>
-                    
-                    {isCompleted ?
-                    <Check className="w-4 h-4" /> :
+            return;
 
-                    <step.icon className="w-4 h-4" />
-                    }
-                  </motion.div>
-                  {index < steps.length - 1 &&
-                  <div className={`w-0.5 h-8 my-1 rounded-full transition-colors ${
-                  isCompleted ? "bg-primary" : "bg-border"}`
-                  } />
-                  }
-                </div>
-                <div className="pt-2">
-                  <p className={`text-sm font-medium transition-colors ${
-                  isActive ? "text-foreground" : isCompleted ? "text-primary" : "text-muted-foreground"}`
-                  }>
-                    {step.label}
-                  </p>
-                </div>
-              </div>);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           })}
         </div>
