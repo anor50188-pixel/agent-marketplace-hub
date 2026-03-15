@@ -1,9 +1,24 @@
 import { Bot, Menu } from "lucide-react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const navLinks = [
+  { href: "#marketplace", label: "Marketplace" },
+  { href: "#testimonials", label: "Sharhlar" },
+  { href: "#pricing", label: "Narxlar" },
+];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const scrollTo = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const el = document.querySelector(href);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      setMenuOpen(false);
+    }
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
@@ -18,15 +33,16 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-8">
-          <a href="#templates" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Shablonlar
-          </a>
-          <a href="#marketplace" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Marketplace
-          </a>
-          <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Imkoniyatlar
-          </a>
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => scrollTo(e, link.href)}
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
           <button className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold">
             Kirish
           </button>
@@ -46,9 +62,16 @@ const Navbar = () => {
             className="md:hidden border-t border-border bg-card"
           >
             <div className="px-6 py-4 flex flex-col gap-3">
-              <a href="#templates" className="text-sm font-medium text-muted-foreground">Shablonlar</a>
-              <a href="#marketplace" className="text-sm font-medium text-muted-foreground">Marketplace</a>
-              <a href="#features" className="text-sm font-medium text-muted-foreground">Imkoniyatlar</a>
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => scrollTo(e, link.href)}
+                  className="text-sm font-medium text-muted-foreground"
+                >
+                  {link.label}
+                </a>
+              ))}
               <button className="gradient-btn px-5 py-2.5 rounded-xl text-sm font-semibold w-full">
                 Kirish
               </button>
