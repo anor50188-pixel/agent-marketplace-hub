@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Bot, User, Sparkles, Wand2 } from "lucide-react";
+import { Send, Bot, User, Sparkles, Wand2, Cpu, Globe, DollarSign } from "lucide-react";
 import { Button } from "./ui/button";
 import { agentStore, type AgentConfig } from "@/lib/agentStore";
 import { subscriptionStore } from "@/lib/subscriptionStore";
@@ -19,6 +19,16 @@ const SUGGESTIONS = [
   "Instagram kontentni rejalashtiruvchi agent",
   "SEO kalit so'z tahlilchi agent",
 ];
+
+const TOOL_DISPLAY: Record<string, { icon: string; label: string }> = {
+  "ai-brain": { icon: "🧠", label: "AI Brain" },
+  "web-search": { icon: "🔍", label: "Web Search" },
+  "code-execution": { icon: "⚡", label: "Code Execution" },
+  "social-search": { icon: "𝕏", label: "Social Media" },
+  "http-request": { icon: "🌐", label: "HTTP Request" },
+  "database": { icon: "🗄️", label: "Database" },
+  "file-analysis": { icon: "📊", label: "File Analysis" },
+};
 
 // Simulate AI parsing user prompt into agent config
 const parsePromptToAgent = (prompt: string): Partial<AgentConfig> => {
@@ -53,7 +63,6 @@ const parsePromptToAgent = (prompt: string): Partial<AgentConfig> => {
 
   tools = [...new Set(tools)];
 
-  // Generate a name from the prompt
   const words = prompt.split(" ").slice(0, 4).join(" ");
   const name = words.charAt(0).toUpperCase() + words.slice(1);
 
@@ -104,7 +113,6 @@ const AgentCreatorChat = () => {
     setIsTyping(true);
 
     if (pendingAgent && ["ha", "ok", "tasdiqlash", "yes", "saqlash", "save", "yaratish", "create"].some((w) => msg.toLowerCase().includes(w))) {
-      // Confirm creation
       setTimeout(() => {
         const currentAgents = agentStore.getAgents();
         if (!subscriptionStore.canCreateAgent(currentAgents.length)) {
@@ -167,24 +175,9 @@ const AgentCreatorChat = () => {
       setPendingAgent(preview);
       setIsCreated(false);
 
-      const toolNames = (preview.tools || [])
-        .map((t) => {
-          const map: Record<string, string> = {
-            "ai-brain": "🧠 AI Brain",
-            "web-search": "🔍 Web Search",
-            "code-execution": "⚡ Code Execution",
-            "social-search": "𝕏 Social Media",
-            "http-request": "🌐 HTTP Request",
-            "database": "🗄️ Database",
-            "file-analysis": "📊 File Analysis",
-          };
-          return map[t] || t;
-        })
-        .join(", ");
-
       addMessage(
         "assistant",
-        `Ajoyib! Sizning so'rovingiz asosida agent tayyor:\n\n📌 **Nomi:** ${preview.name}\n🎯 **Vazifa:** ${preview.role}\n🔧 **Toollar:** ${toolNames}\n📁 **Kategoriya:** ${preview.category}\n💰 **Taxminiy oylik API xarajat:** ~$${preview.apiCostPerMonth}\n📊 **Taxminiy oylik so'rovlar:** ~${preview.apiRequestsPerMonth}\n\nTasdiqlash uchun **"Ha"** yoki **"Yaratish"** deb yozing.\nBekor qilish uchun **"Yo'q"** deb yozing.`,
+        `Ajoyib! Sizning so'rovingiz asosida agent tayyor:`,
         { agentPreview: preview }
       );
       setIsTyping(false);
@@ -220,20 +213,76 @@ const AgentCreatorChat = () => {
                   <User className="w-4 h-4 text-secondary" />
                 )}
               </div>
-              <div
-                className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-line ${
-                  msg.role === "assistant"
-                    ? "bg-card border border-border/40 text-card-foreground"
-                    : "chat-bubble-user text-primary-foreground"
-                }`}
-              >
-                {msg.content}
+              <div className={`max-w-[80%] ${msg.role === "user" ? "" : ""}`}>
+                <div
+                  className={`rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-line ${
+                    msg.role === "assistant"
+                      ? "bg-card border border-border/40 text-card-foreground"
+                      : "chat-bubble-user text-primary-foreground"
+                  }`}
+                >
+                  {msg.content}
+                </div>
+                {/* Agent Preview Card */}
+                {msg.agentPreview && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ delay: 0.15 }}
+                    className="mt-3 rounded-xl border border-primary/20 bg-card/80 p-4 space-y-3"
+                    style={{ boxShadow: "0 0 20px hsl(var(--primary) / 0.06)" }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center">
+                        <Bot className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="font-display font-bold text-sm text-foreground">{msg.agentPreview.name}</h4>
+                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                          {msg.agentPreview.category}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{msg.agentPreview.role}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {(msg.agentPreview.tools || []).map((t) => (
+                        <span key={t} className="flex items-center gap-1 px-2 py-1 rounded-md bg-muted/40 text-[10px] font-medium text-foreground">
+                          {TOOL_DISPLAY[t]?.icon || "🔧"} {TOOL_DISPLAY[t]?.label || t}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex gap-4 pt-1 border-t border-border/30">
+                      <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                        <DollarSign className="w-3 h-3 text-secondary" />
+                        ~${msg.agentPreview.apiCostPerMonth}/oy
+                      </div>
+                      <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                        <Cpu className="w-3 h-3 text-primary" />
+                        ~{msg.agentPreview.apiRequestsPerMonth} so'rov/oy
+                      </div>
+                    </div>
+                    <div className="flex gap-2 pt-1">
+                      <button
+                        onClick={() => handleSend("Ha")}
+                        className="flex-1 h-8 rounded-lg gradient-btn text-xs font-semibold"
+                      >
+                        ✅ Yaratish
+                      </button>
+                      <button
+                        onClick={() => handleSend("Yo'q")}
+                        className="flex-1 h-8 rounded-lg border border-border bg-card text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors"
+                      >
+                        Bekor qilish
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
 
-        {/* Suggestions (only show at start) */}
+        {/* Suggestions */}
         {messages.length === 1 && !isTyping && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -241,15 +290,18 @@ const AgentCreatorChat = () => {
             transition={{ delay: 0.3 }}
             className="flex flex-wrap gap-2 pl-11"
           >
-            {SUGGESTIONS.map((s) => (
-              <button
+            {SUGGESTIONS.map((s, i) => (
+              <motion.button
                 key={s}
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 + i * 0.05 }}
                 onClick={() => handleSuggestionClick(s)}
-                className="px-3 py-1.5 rounded-full text-xs font-medium bg-card border border-border/40 text-foreground hover:border-primary/40 hover:bg-primary/5 transition-all"
+                className="suggestion-chip px-3.5 py-2 rounded-xl text-xs font-medium text-foreground"
               >
                 <Wand2 className="w-3 h-3 inline mr-1.5 text-primary" />
                 {s}
-              </button>
+              </motion.button>
             ))}
           </motion.div>
         )}
@@ -276,9 +328,9 @@ const AgentCreatorChat = () => {
         <div ref={bottomRef} />
       </div>
 
-      {/* Input */}
-      <div className="p-4 border-t border-border/30">
-        <div className="flex gap-2 max-w-2xl mx-auto">
+      {/* Glass Input */}
+      <div className="p-4">
+        <div className="chat-glass-input flex gap-2 max-w-2xl mx-auto p-2">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -290,13 +342,13 @@ const AgentCreatorChat = () => {
                 ? '"Ha" yoki "Yo\'q" deb javob bering...'
                 : "Qanday agent yaratmoqchisiz? Yozing..."
             }
-            className="flex-1 h-11 rounded-xl border border-border/50 bg-card px-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all"
+            className="flex-1 h-9 bg-transparent px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
           <Button
             onClick={() => handleSend()}
             disabled={!input.trim() || isTyping}
             size="icon"
-            className="h-11 w-11 rounded-xl gradient-btn border-0 shrink-0"
+            className="h-9 w-9 rounded-xl gradient-btn border-0 shrink-0"
           >
             <Send className="w-4 h-4" />
           </Button>

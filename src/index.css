@@ -226,4 +226,146 @@
     border: 1px solid hsl(var(--border) / 0.5);
     box-shadow: 0 4px 12px hsl(0 0% 0% / 0.4);
   }
+
+  /* Sidebar active indicator */
+  .sidebar-active-indicator {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    border-radius: 0 4px 4px 0;
+    background: var(--gradient-primary);
+  }
+
+  /* Stat card with gradient border */
+  .stat-card-gradient {
+    position: relative;
+    border: 1px solid transparent;
+    background: hsl(var(--card));
+    background-clip: padding-box;
+    transition: all 0.3s ease;
+  }
+
+  .stat-card-gradient::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--accent) / 0.15), transparent);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .stat-card-gradient:hover::before {
+    opacity: 1;
+  }
+
+  /* Agent card glow hover */
+  .agent-card-glow {
+    transition: all 0.3s ease;
+  }
+
+  .agent-card-glow:hover {
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 24px hsl(var(--primary) / 0.08), 0 8px 24px hsl(0 0% 0% / 0.12);
+    transform: translateY(-2px);
+  }
+
+  /* Period pill selector */
+  .period-pill {
+    background: hsl(var(--muted) / 0.5);
+    border: 1px solid hsl(var(--border));
+    border-radius: 9999px;
+    padding: 3px;
+  }
+
+  .period-pill-active {
+    background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    border-radius: 9999px;
+    box-shadow: 0 2px 8px hsl(var(--primary) / 0.3);
+  }
+
+  /* Dashboard top bar */
+  .dashboard-topbar {
+    background: hsl(var(--card) / 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid hsl(var(--border) / 0.4);
+  }
+
+  /* Chat glass input */
+  .chat-glass-input {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--border) / 0.4);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .chat-glass-input:focus-within {
+    border-color: hsl(var(--primary) / 0.4);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.08), 0 4px 16px hsl(0 0% 0% / 0.1);
+  }
+
+  /* Suggestion chip gradient border */
+  .suggestion-chip {
+    position: relative;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border) / 0.4);
+    transition: all 0.2s ease;
+  }
+
+  .suggestion-chip:hover {
+    border-color: hsl(var(--primary) / 0.4);
+    background: hsl(var(--primary) / 0.05);
+    box-shadow: 0 0 12px hsl(var(--primary) / 0.08);
+    transform: translateY(-1px);
+  }
+
+  /* Tab bottom indicator */
+  .tab-bottom-active {
+    position: relative;
+  }
+
+  .tab-bottom-active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 25%;
+    right: 25%;
+    height: 2px;
+    border-radius: 2px 2px 0 0;
+    background: var(--gradient-primary);
+  }
+
+  /* Notification badge */
+  .notif-badge {
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 9999px;
+    font-size: 9px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(var(--destructive));
+    color: hsl(var(--destructive-foreground));
+    line-height: 1;
+  }
+
+  /* Status pulse */
+  .status-pulse {
+    animation: statusPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes statusPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 hsl(142 71% 45% / 0.4); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 6px hsl(142 71% 45% / 0); }
+  }
 }
