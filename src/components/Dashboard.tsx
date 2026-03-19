@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import DashboardSidebar from "./DashboardSidebar";
 import DashboardContent from "./DashboardContent";
+import DashboardTopBar from "./DashboardTopBar";
 import AgentusChat from "./AgentusChat";
 
 interface DashboardProps {
@@ -24,7 +25,10 @@ const Dashboard = ({ onClose }: DashboardProps) => {
         onSectionChange={setActiveSection}
         onClose={onClose}
       />
-      <DashboardContent activeSection={activeSection} onSectionChange={setActiveSection} />
+      <div className="flex-1 flex flex-col min-w-0 min-h-0">
+        <DashboardTopBar activeSection={activeSection} />
+        <DashboardContent activeSection={activeSection} onSectionChange={setActiveSection} />
+      </div>
       <AgentusChat />
     </motion.div>
   );

@@ -86,14 +86,14 @@ const Statistics = ({ onSectionChange }: { onSectionChange?: (id: string) => voi
               Marketplace'dagi agentlaringiz ko'rsatkichlari
             </p>
           </div>
-          <div className="flex gap-1 bg-card border border-border rounded-lg p-0.5">
+          <div className="period-pill flex gap-0.5">
             {(["hafta", "oy", "yil"] as const).map((p) => (
               <button
                 key={p}
                 onClick={() => setPeriod(p)}
-                className={`px-3 py-1.5 rounded-md text-[11px] font-medium transition-all ${
+                className={`px-3.5 py-1.5 rounded-full text-[11px] font-semibold transition-all ${
                   period === p
-                    ? "bg-primary/15 text-primary"
+                    ? "period-pill-active"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -118,7 +118,7 @@ const Statistics = ({ onSectionChange }: { onSectionChange?: (id: string) => voi
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="rounded-xl border border-border bg-card p-4"
+              className="stat-card-gradient rounded-xl p-4"
             >
               <div className="flex items-center justify-between mb-2">
                 <stat.icon className={`w-4 h-4 ${stat.color}`} />
