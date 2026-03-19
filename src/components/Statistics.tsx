@@ -86,14 +86,14 @@ const Statistics = ({ onSectionChange }: { onSectionChange?: (id: string) => voi
               Marketplace'dagi agentlaringiz ko'rsatkichlari
             </p>
           </div>
-          <div className="flex gap-1 bg-card border border-border rounded-lg p-0.5">
+          <div className="period-pill flex gap-0.5">
             {(["hafta", "oy", "yil"] as const).map((p) => (
               <button
                 key={p}
                 onClick={() => setPeriod(p)}
-                className={`px-3 py-1.5 rounded-md text-[11px] font-medium transition-all ${
+                className={`px-3.5 py-1.5 rounded-full text-[11px] font-semibold transition-all ${
                   period === p
-                    ? "bg-primary/15 text-primary"
+                    ? "period-pill-active"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
