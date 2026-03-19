@@ -63,7 +63,7 @@ const Testimonials = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border border-border bg-card/50 text-muted-foreground mb-4">
             <Star className="w-3.5 h-3.5 text-primary" />
@@ -77,7 +77,8 @@ const Testimonials = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Masonry-style columns */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
@@ -85,16 +86,16 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="rounded-xl border border-border bg-card/40 backdrop-blur-sm p-5 hover:border-primary/20 transition-all relative"
+              className="break-inside-avoid rounded-2xl border border-border bg-card/40 backdrop-blur-sm p-5 hover:border-primary/20 hover:shadow-[0_8px_30px_hsl(250_85%_65%_/_0.06)] transition-all duration-300 relative group"
             >
-              <Quote className="absolute top-4 right-4 w-5 h-5 text-primary/10" />
+              <Quote className="absolute top-4 right-4 w-6 h-6 text-primary/[0.06] group-hover:text-primary/10 transition-colors" />
 
               {/* Stars */}
               <div className="flex gap-0.5 mb-3">
                 {Array.from({ length: 5 }).map((_, si) => (
                   <Star
                     key={si}
-                    className={`w-3.5 h-3.5 ${si < t.rating ? "text-primary fill-primary" : "text-muted"}`}
+                    className={`w-3.5 h-3.5 ${si < t.rating ? "text-primary fill-primary" : "text-muted/50"}`}
                   />
                 ))}
               </div>
@@ -103,13 +104,13 @@ const Testimonials = () => {
               <p className="text-sm text-foreground/80 leading-relaxed mb-4">"{t.text}"</p>
 
               {/* Agent badge */}
-              <span className="inline-block px-2 py-0.5 rounded-md text-[10px] bg-primary/8 text-primary border border-primary/15 mb-3">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-medium bg-primary/8 text-primary border border-primary/15 mb-4">
                 🤖 {t.agent}
               </span>
 
               {/* Author */}
-              <div className="flex items-center gap-3 pt-3 border-t border-border/40">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
+              <div className="flex items-center gap-3 pt-3 border-t border-border/30">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center text-xs font-bold text-primary border border-primary/10">
                   {t.avatar}
                 </div>
                 <div>

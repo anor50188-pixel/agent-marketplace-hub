@@ -24,7 +24,6 @@ const PopularAgents = ({ onOpenDashboard }: PopularAgentsProps) => {
 
   return (
     <section id="marketplace" className="relative py-24 overflow-hidden scroll-mt-20">
-      {/* Background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
@@ -33,7 +32,7 @@ const PopularAgents = ({ onOpenDashboard }: PopularAgentsProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border border-border bg-card/50 text-muted-foreground mb-4">
             <ShoppingCart className="w-3.5 h-3.5 text-secondary" />
@@ -47,7 +46,7 @@ const PopularAgents = ({ onOpenDashboard }: PopularAgentsProps) => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {topAgents.map((agent, i) => (
             <motion.div
               key={agent.id}
@@ -55,58 +54,62 @@ const PopularAgents = ({ onOpenDashboard }: PopularAgentsProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="rounded-xl border border-border bg-card/60 backdrop-blur-sm p-5 hover:border-primary/30 hover:shadow-[0_0_30px_hsl(250_85%_65%_/_0.08)] transition-all group"
+              className="rounded-2xl border border-border bg-card/50 backdrop-blur-sm p-5 hover:border-primary/30 hover:shadow-[0_8px_40px_hsl(250_85%_65%_/_0.1)] transition-all duration-300 group relative overflow-hidden"
             >
-              {/* Header */}
-              <div className="flex items-start gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <Bot className="w-5 h-5 text-primary" />
-                </div>
-                <div className="min-w-0">
-                  <h3 className="font-display font-semibold text-sm text-card-foreground truncate">
-                    {agent.name}
-                  </h3>
-                  <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="text-[11px] text-muted-foreground">{agent.seller}</span>
-                    {agent.verified && <ShieldCheck className="w-3 h-3 text-secondary" />}
+              {/* Hover glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="relative">
+                {/* Header */}
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform border border-primary/10">
+                    <Bot className="w-5 h-5 text-primary" />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-display font-semibold text-sm text-card-foreground truncate">
+                      {agent.name}
+                    </h3>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <span className="text-[11px] text-muted-foreground">{agent.seller}</span>
+                      {agent.verified && <ShieldCheck className="w-3 h-3 text-secondary" />}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Description */}
-              <p className="text-xs text-muted-foreground leading-relaxed mb-3 line-clamp-2">
-                {agent.role}
-              </p>
+                <p className="text-xs text-muted-foreground leading-relaxed mb-3 line-clamp-2">
+                  {agent.role}
+                </p>
 
-              {/* Tools */}
-              <div className="flex flex-wrap gap-1 mb-3">
-                {agent.tools.slice(0, 3).map((t) => (
-                  <span key={t} className="px-1.5 py-0.5 rounded text-[10px] bg-muted text-muted-foreground">
-                    {TOOL_ICONS[t] || "🔧"} {t.replace("-", " ")}
+                {/* Tools */}
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {agent.tools.slice(0, 3).map((t) => (
+                    <span key={t} className="px-1.5 py-0.5 rounded-md text-[10px] bg-muted/80 text-muted-foreground border border-border/50">
+                      {TOOL_ICONS[t] || "🔧"} {t.replace("-", " ")}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Stats */}
+                <div className="flex items-center justify-between text-[11px] text-muted-foreground mb-4 py-2.5 border-t border-border/40">
+                  <span className="flex items-center gap-1">
+                    <Star className="w-3 h-3 text-primary fill-primary" />
+                    {agent.rating}
                   </span>
-                ))}
-              </div>
+                  <span className="flex items-center gap-1">
+                    <Eye className="w-3 h-3" />
+                    {(agent.totalViews || 0).toLocaleString()}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <ShoppingCart className="w-3 h-3" />
+                    {agent.downloads}
+                  </span>
+                </div>
 
-              {/* Stats */}
-              <div className="flex items-center justify-between text-[11px] text-muted-foreground mb-3">
-                <span className="flex items-center gap-1">
-                  <Star className="w-3 h-3 text-primary" />
-                  {agent.rating} ({agent.reviewCount})
-                </span>
-                <span className="flex items-center gap-1">
-                  <Eye className="w-3 h-3" />
-                  {(agent.totalViews || 0).toLocaleString()}
-                </span>
-                <span className="flex items-center gap-1">
-                  <ShoppingCart className="w-3 h-3" />
-                  {agent.downloads}
-                </span>
-              </div>
-
-              {/* Price */}
-              <div className="flex items-center justify-between">
-                <span className="text-lg font-bold text-secondary">${agent.price}</span>
-                <span className="text-[10px] text-muted-foreground/60">~${agent.apiCostPerMonth}/oy API</span>
+                {/* Price */}
+                <div className="flex items-center justify-between">
+                  <span className="text-xl font-bold gradient-text">${agent.price}</span>
+                  <span className="text-[10px] text-muted-foreground/50">~${agent.apiCostPerMonth}/oy</span>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -117,12 +120,12 @@ const PopularAgents = ({ onOpenDashboard }: PopularAgentsProps) => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="text-center mt-8"
+          className="text-center mt-10"
         >
           <Button
             onClick={onOpenDashboard}
             variant="outline"
-            className="rounded-xl border-border hover:border-primary/30 hover:bg-primary/5"
+            className="rounded-xl border-border hover:border-primary/30 hover:bg-primary/5 px-6"
           >
             Marketplace'ni ko'rish
             <ArrowRight className="w-4 h-4 ml-2" />
