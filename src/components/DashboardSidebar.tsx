@@ -1,9 +1,11 @@
 import { useSyncExternalStore } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown, Store, Crown, Sparkles } from "lucide-react";
+import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown, Store, Crown, Sparkles, Shield } from "lucide-react";
 import { subscriptionStore, PLANS } from "@/lib/subscriptionStore";
 import { i18nStore } from "@/lib/i18nStore";
 import { useAuth } from "@/contexts/AuthContext";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 
 const menuGroups = [
   {
@@ -44,6 +46,8 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
   const t = i18nStore.t;
   const planConfig = PLANS.find((p) => p.id === currentPlan)!;
   const { user } = useAuth();
+  const { isAdmin } = useIsAdmin();
+  const navigate = useNavigate();
 
   const userInitial = user?.email?.charAt(0).toUpperCase() || "U";
   const userEmail = user?.email || "user@example.com";
@@ -143,6 +147,19 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
           </div>
         ))}
       </nav>
+
+      {/* Admin link */}
+      {isAdmin && (
+        <div className="px-3 pb-1">
+          <button
+            onClick={() => navigate("/admin")}
+            className="w-full flex items-center gap-2 px-2 py-2 rounded-lg text-xs font-medium text-destructive hover:bg-destructive/10 transition-colors"
+          >
+            <Shield className="w-4 h-4" />
+            Admin Panel
+          </button>
+        </div>
+      )}
 
       {/* Footer */}
       <div className="p-3 border-t border-sidebar-border">
