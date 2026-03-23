@@ -1,93 +1,55 @@
 
 
-# Frontend-Only Yaxshilash Rejasi
+# Admin Panel Rejasi
 
-Maqsad: Chiroyli, professional frontend yaratish — barcha AI/backend logikani keyinchalik siz o'zingiz ulaysiz. Hozir mock data va placeholder'lar bilan ishlaydi.
+## Maqsad
+Admin panel — foydalanuvchilarni boshqarish, saytga kontent qo'shish/o'zgartirish, agentlarni moderatsiya qilish uchun alohida himoyalangan sahifa.
 
----
+## Arxitektura
 
-## Asosiy O'zgarishlar
+### 1. Rol tizimi (Database)
+- `user_roles` jadvali yaratish (`user_id`, `role` — enum: `admin`, `moderator`, `user`)
+- `has_role()` security definer funksiyasi — RLS policy'larda ishlatish uchun
+- Birinchi admin'ni qo'lda belgilash (siz o'zingiz)
 
-### 1. Router Arxitekturasini To'g'rilash
-Hozir Dashboard `fixed inset-0` overlay sifatida ochilmoqda — bu brauzer tarixini buzadi. 
+### 2. Admin sahifa va routing
+- `/admin` route qo'shish — faqat `admin` rolidagi foydalanuvchilar kiradi
+- Rol tekshiruvi AuthContext'da — `isAdmin` flag qo'shish
+- Admin bo'lmagan foydalanuvchilar `/dashboard`ga redirect bo'ladi
 
-- React Router bilan alohida sahifalar: `/dashboard`, `/auth`, `/`
-- Dashboard ichida section'lar URL query param orqali boshqariladi (`/dashboard?section=my-agents`)
-- Auth sahifaga yo'naltirish UI'si tayyor bo'ladi (backend ulanmaguncha mock user)
+### 3. Admin Panel UI bo'limlari
 
-**Fayllar:** `App.tsx`, `pages/Index.tsx`, yangi `pages/Dashboard.tsx`
+| Bo'lim | Funksiya |
+|--------|----------|
+| **Foydalanuvchilar** | Ro'yxat, qidirish, rollarni o'zgartirish, bloklash (UI only) |
+| **Agentlar** | Barcha agentlar ro'yxati, moderatsiya (tasdiqlash/rad etish UI) |
+| **Kontent** | Landing sahifa matnlarini, narxlarni o'zgartirish UI |
+| **Statistika** | Umumiy platformadagi foydalanuvchi/agent/tranzaksiya soni |
 
-### 2. Agent Yaratish — Split Panel (Lovable-style)
-Hozirgi AgentCreatorChat va AgentLiveBuilder'ni yaxshilash:
+### 4. Texnik tafsilotlar
 
-- Chat panel chapda (40%), Builder panel o'ngda (60%)
-- Chat'da AI javoblari hozircha `parsePromptToAgent` mock funksiya orqali — keyinchalik siz backend API'ga almashtirasiz
-- Builder'da real-time tahrirlash (nom, rol, tools, kategoriya)
-- "Nashr qilish" bosilganda agent `agentStore`'ga qo'shiladi va "Agentlarim"da ko'rinadi
-- **Backend ulash uchun:** `parsePromptToAgent` funksiyani API call bilan almashtirish yetarli
+**Yangi fayllar:**
+- `src/pages/AdminPage.tsx` — admin layout (sidebar + content)
+- `src/components/admin/AdminSidebar.tsx` — admin navigatsiya
+- `src/components/admin/AdminUsers.tsx` — foydalanuvchilar ro'yxati
+- `src/components/admin/AdminAgents.tsx` — agentlar moderatsiyasi
+- `src/components/admin/AdminContent.tsx` — kontent boshqaruvi
+- `src/components/admin/AdminStats.tsx` — umumiy statistika
+- `src/hooks/useIsAdmin.ts` — admin rolini tekshirish hook
 
-**Fayllar:** `AgentCreatorChat.tsx`, `AgentLiveBuilder.tsx`
+**O'zgartiriladigan fayllar:**
+- `App.tsx` — `/admin` route qo'shish
+- `AuthContext.tsx` — rol tekshiruvini qo'shish
 
-### 3. MyAgents — Yaxshilangan Kartalar
-- 3 ustunli grid (xl ekranlar)
-- Hover glow effect, mini-stat'lar (runs, success rate — mock)
-- Empty state'da "Agent yaratish" tugmasi `create` section'ga o'tkazadi
-- Agent bosilganda AgentDashboard ochiladi
+**Database migration:**
+- `user_roles` jadval + `app_role` enum
+- `has_role()` funksiya
+- RLS policy'lar
 
-**Fayllar:** `MyAgents.tsx`
+**Hozircha mock data bilan:**
+Barcha jadvallar (users, agents) frontend'da mock bo'ladi — keyinchalik siz backend API ulaysiz. Admin panel UI to'liq tayyor bo'ladi.
 
-### 4. Marketplace UI
-- Agent kartalarini grid layout'da ko'rsatish
-- Agent detail sahifasi: narx, tavsif, sharhlar, "Sotib olish" tugmasi (placeholder)
-- Qidiruv va filter UI (kategoriya, narx bo'yicha)
-
-**Fayllar:** `Marketplace.tsx`, `MarketplaceAgentDetail.tsx`
-
-### 5. Statistics/Analytics — Vizual Yaxshilash
-- KPI kartalar gradient border bilan
-- Pill-shape period selector
-- Bar chart'lar mock data bilan (keyinchalik API'dan keladi)
-
-**Fayllar:** `Statistics.tsx`
-
-### 6. Sidebar va Top Bar Polish
-- Active indicator line (Linear-style)
-- Notification badge'lar
-- User ma'lumotlari AuthContext'dan
-- Breadcrumb sarlavha
-
-**Fayllar:** `DashboardSidebar.tsx`, `DashboardTopBar.tsx`
-
-### 7. Mobile Responsive
-- Sidebar hamburger menu sifatida
-- Split panel chat'da mobile'da to'liq ekran chat, builder alohida tab
-
-**Fayllar:** barcha dashboard komponentlari
-
----
-
-## Texnik Tafsilotlar
-
-### Backend Ulash Nuqtalari (siz uchun)
-Quyidagi joylarda mock logikani API call bilan almashtirasiz:
-
-| Joy | Hozir | Siz almashtirasiz |
-|-----|-------|-------------------|
-| `AgentCreatorChat.tsx` → `parsePromptToAgent()` | Keyword regex | AI API call |
-| `agentStore.ts` → `addAgent/getAgents` | In-memory array | Database CRUD |
-| `MyAgents.tsx` → agent stats | Random mock | API dan haqiqiy stat |
-| `Statistics.tsx` → barcha grafik data | Hardcoded mock | Analytics API |
-| `Marketplace.tsx` → agent ro'yxati | Mock data | Marketplace API |
-| `AuthContext.tsx` → user session | Supabase auth | O'z auth sistemaingiz |
-
-### O'zgartirilmaydigan fayllar
-- `src/integrations/supabase/client.ts` — avtomatik
-- `src/integrations/supabase/types.ts` — avtomatik
-- `.env` — avtomatik
-
-### Saqlanuvchi Pattern'lar
-- Framer Motion animatsiyalar
-- Tailwind + CSS utility class'lar
-- `useSyncExternalStore` pattern store'lar uchun
-- O'zbek til interfeysi
+**Xavfsizlik:**
+- Rol localStorage'da **saqlanmaydi** — faqat database'dan tekshiriladi
+- `has_role()` security definer funksiyasi RLS'da recursive muammo bo'lmaydi
 
