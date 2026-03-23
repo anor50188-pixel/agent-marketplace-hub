@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/landing/HowItWorks";
@@ -7,23 +6,20 @@ import PopularAgents from "@/components/landing/PopularAgents";
 import Testimonials from "@/components/landing/Testimonials";
 import PricingSection from "@/components/landing/PricingSection";
 import LandingFooter from "@/components/landing/LandingFooter";
-import Dashboard from "@/components/Dashboard";
 
 const Index = () => {
-  const [showDashboard, setShowDashboard] = useState(false);
+  const navigate = useNavigate();
+  const goToDashboard = () => navigate("/dashboard");
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <HeroSection onStartClick={() => setShowDashboard(true)} />
+      <HeroSection onStartClick={goToDashboard} />
       <HowItWorks />
-      <PopularAgents onOpenDashboard={() => setShowDashboard(true)} />
+      <PopularAgents onOpenDashboard={goToDashboard} />
       <Testimonials />
-      <PricingSection onOpenDashboard={() => setShowDashboard(true)} />
+      <PricingSection onOpenDashboard={goToDashboard} />
       <LandingFooter />
-      <AnimatePresence>
-        {showDashboard && <Dashboard onClose={() => setShowDashboard(false)} />}
-      </AnimatePresence>
     </div>
   );
 };
