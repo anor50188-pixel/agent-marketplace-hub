@@ -21,7 +21,7 @@ const DashboardContent = ({ activeSection, onSectionChange }: DashboardContentPr
   return (
     <div className="flex-1 flex flex-col min-w-0 min-h-0">
       {activeSection === "create" && <AgentCreatorChat />}
-      {activeSection === "my-agents" && <MyAgents />}
+      {activeSection === "my-agents" && <MyAgents onSectionChange={onSectionChange} />}
       {activeSection === "apps" && <AppsSection />}
       {activeSection === "templates" && <AgentTemplates onSectionChange={onSectionChange} />}
       {activeSection === "integrations" && <IntegrationsSection />}

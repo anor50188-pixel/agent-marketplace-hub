@@ -15,7 +15,11 @@ const TOOL_ICONS: Record<string, string> = {
   "website-reader": "🌐",
 };
 
-const MyAgents = () => {
+interface MyAgentsProps {
+  onSectionChange?: (id: string) => void;
+}
+
+const MyAgents = ({ onSectionChange }: MyAgentsProps) => {
   const agents = useSyncExternalStore(agentStore.subscribe, agentStore.getAgents);
   const [selectedAgent, setSelectedAgent] = useState<AgentConfig | null>(null);
 
@@ -46,7 +50,10 @@ const MyAgents = () => {
             <p className="text-muted-foreground text-sm max-w-[280px] mb-5">
               AI agentingizni yarating — u siz uchun avtomatik ishlar bajaradi.
             </p>
-            <button className="flex items-center gap-2 px-5 py-2.5 rounded-xl gradient-btn text-sm font-semibold">
+            <button
+              onClick={() => onSectionChange?.("create")}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl gradient-btn text-sm font-semibold"
+            >
               <Plus className="w-4 h-4" />
               Agent yaratish
             </button>
