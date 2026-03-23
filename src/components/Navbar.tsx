@@ -10,6 +10,18 @@ const navLinks = [
   { href: "#pricing", label: "Narxlar" },
 ];
 
+const NavDashboardButton = () => {
+  const navigate = useNavigate();
+  return (
+    <button
+      onClick={() => navigate("/dashboard")}
+      className="gradient-btn px-4 py-2 rounded-xl text-sm font-semibold shadow-md"
+    >
+      Dashboard
+    </button>
+  );
+};
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, signOut } = useAuth();
