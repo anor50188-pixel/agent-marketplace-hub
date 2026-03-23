@@ -1,69 +1,93 @@
 
 
-# Dashboard Dizaynini Yaxshilash — Refero Asosida
+# Frontend-Only Yaxshilash Rejasi
 
-## Refero Tadqiqot Xulosasi
-
-Refero'dan topilgan eng yaxshi namunalar (n8n Insights, Intercom Fin AI, Manus, Cartesia, Linear) asosida quyidagi dizayn pattern'larni qo'llaymiz:
-
-- **KPI stat kartalar** — yuqori qismda gradient border va trend indikatorlari bilan
-- **Sidebar yaxshilash** — hover glow, active indicator line, notification badge'lar
-- **Breadcrumb / kontekst sarlavha** — har bir sahifada aniq navigatsiya
-- **Glassmorphic kartalar** — chuqurroq shadow va subtle border gradient
-- **Micro-animatsiyalar** — hover scale, stagger entrance, smooth transitions
+Maqsad: Chiroyli, professional frontend yaratish — barcha AI/backend logikani keyinchalik siz o'zingiz ulaysiz. Hozir mock data va placeholder'lar bilan ishlaydi.
 
 ---
 
-## Reja
+## Asosiy O'zgarishlar
 
-### 1. DashboardSidebar — Premium Dizayn
-- Active item'ga chapda 2px gradient indicator line qo'shish (Linear pattern)
-- Notification badge (raqamli) — marketplace va analytics item'larga
-- Sidebar footer'da user avatar o'rniga AuthContext'dan haqiqiy user ma'lumotlarini ko'rsatish
-- Hover state'larda subtle glow effect
-- "Create" tugmasini alohida gradient CTA button sifatida ajratish
+### 1. Router Arxitekturasini To'g'rilash
+Hozir Dashboard `fixed inset-0` overlay sifatida ochilmoqda — bu brauzer tarixini buzadi. 
 
-### 2. Dashboard Umumiy Layout — Kontekst Sarlavha
-- Dashboard.tsx ga yuqori qismda top bar qo'shish: breadcrumb, notification bell, user avatar
-- Manus/n8n patternidek compact header bar
+- React Router bilan alohida sahifalar: `/dashboard`, `/auth`, `/`
+- Dashboard ichida section'lar URL query param orqali boshqariladi (`/dashboard?section=my-agents`)
+- Auth sahifaga yo'naltirish UI'si tayyor bo'ladi (backend ulanmaguncha mock user)
+
+**Fayllar:** `App.tsx`, `pages/Index.tsx`, yangi `pages/Dashboard.tsx`
+
+### 2. Agent Yaratish — Split Panel (Lovable-style)
+Hozirgi AgentCreatorChat va AgentLiveBuilder'ni yaxshilash:
+
+- Chat panel chapda (40%), Builder panel o'ngda (60%)
+- Chat'da AI javoblari hozircha `parsePromptToAgent` mock funksiya orqali — keyinchalik siz backend API'ga almashtirasiz
+- Builder'da real-time tahrirlash (nom, rol, tools, kategoriya)
+- "Nashr qilish" bosilganda agent `agentStore`'ga qo'shiladi va "Agentlarim"da ko'rinadi
+- **Backend ulash uchun:** `parsePromptToAgent` funksiyani API call bilan almashtirish yetarli
+
+**Fayllar:** `AgentCreatorChat.tsx`, `AgentLiveBuilder.tsx`
 
 ### 3. MyAgents — Yaxshilangan Kartalar
-- Agent kartalariga gradient hover border (glow effect)
-- Kichik sparkline/mini-stat (total runs, success rate) ko'rsatish
-- Empty state'ni illustration va CTA button bilan yaxshilash
-- Grid layout 3 ustunli qilish katta ekranlarda
+- 3 ustunli grid (xl ekranlar)
+- Hover glow effect, mini-stat'lar (runs, success rate — mock)
+- Empty state'da "Agent yaratish" tugmasi `create` section'ga o'tkazadi
+- Agent bosilganda AgentDashboard ochiladi
 
-### 4. AgentCreatorChat — Premium Chat UI
-- Chat input'ni floating glass-style container qilish (Manus pattern)
-- Suggestion chip'larni gradient border bilan yaxshilash
-- Agent preview card'ni chat ichida vizual karta sifatida ko'rsatish (hozir faqat matn)
+**Fayllar:** `MyAgents.tsx`
 
-### 5. Statistics/Analytics — Yaxshilangan Grafik
-- Gradient fill area chart qo'shish (n8n pattern)
-- KPI kartalariga trend arrow va foiz o'zgarish ko'rsatish
-- Vaqt oralig'i selector'ni pill-shape toggle qilish
+### 4. Marketplace UI
+- Agent kartalarini grid layout'da ko'rsatish
+- Agent detail sahifasi: narx, tavsif, sharhlar, "Sotib olish" tugmasi (placeholder)
+- Qidiruv va filter UI (kategoriya, narx bo'yicha)
 
-### 6. AgentDashboard (individual agent) — Polish
-- Header'dagi status badge'ni animated pulse bilan
-- Tab'larni bottom-border active indicator bilan (Intercom pattern)
-- Overview stat kartalariga subtle gradient background
+**Fayllar:** `Marketplace.tsx`, `MarketplaceAgentDetail.tsx`
+
+### 5. Statistics/Analytics — Vizual Yaxshilash
+- KPI kartalar gradient border bilan
+- Pill-shape period selector
+- Bar chart'lar mock data bilan (keyinchalik API'dan keladi)
+
+**Fayllar:** `Statistics.tsx`
+
+### 6. Sidebar va Top Bar Polish
+- Active indicator line (Linear-style)
+- Notification badge'lar
+- User ma'lumotlari AuthContext'dan
+- Breadcrumb sarlavha
+
+**Fayllar:** `DashboardSidebar.tsx`, `DashboardTopBar.tsx`
+
+### 7. Mobile Responsive
+- Sidebar hamburger menu sifatida
+- Split panel chat'da mobile'da to'liq ekran chat, builder alohida tab
+
+**Fayllar:** barcha dashboard komponentlari
 
 ---
 
 ## Texnik Tafsilotlar
 
-**O'zgartiriladigan fayllar:**
-1. `src/components/DashboardSidebar.tsx` — active indicator, badge, user info, gradient CTA
-2. `src/components/Dashboard.tsx` — top bar component qo'shish
-3. `src/components/MyAgents.tsx` — karta dizayni, grid, empty state
-4. `src/components/AgentCreatorChat.tsx` — chat UI polish, agent preview card
-5. `src/components/Statistics.tsx` — chart va KPI yaxshilash
-6. `src/components/AgentDashboard.tsx` — header, tabs, status polish
-7. `src/components/agent-dashboard/AgentDashboardOverview.tsx` — stat karta gradient
-8. `src/index.css` — yangi utility class'lar (sidebar-indicator, stat-card-gradient, va boshqalar)
+### Backend Ulash Nuqtalari (siz uchun)
+Quyidagi joylarda mock logikani API call bilan almashtirasiz:
 
-**Mavjud pattern'lardan foydalanish:**
-- `gradient-btn`, `glass`, `surface-card` class'larni kengaytirish
-- `framer-motion` animatsiyalarni davom ettirish
-- Mavjud rang palitrasini saqlash (primary indigo, secondary cyan, accent purple)
+| Joy | Hozir | Siz almashtirasiz |
+|-----|-------|-------------------|
+| `AgentCreatorChat.tsx` → `parsePromptToAgent()` | Keyword regex | AI API call |
+| `agentStore.ts` → `addAgent/getAgents` | In-memory array | Database CRUD |
+| `MyAgents.tsx` → agent stats | Random mock | API dan haqiqiy stat |
+| `Statistics.tsx` → barcha grafik data | Hardcoded mock | Analytics API |
+| `Marketplace.tsx` → agent ro'yxati | Mock data | Marketplace API |
+| `AuthContext.tsx` → user session | Supabase auth | O'z auth sistemaingiz |
+
+### O'zgartirilmaydigan fayllar
+- `src/integrations/supabase/client.ts` — avtomatik
+- `src/integrations/supabase/types.ts` — avtomatik
+- `.env` — avtomatik
+
+### Saqlanuvchi Pattern'lar
+- Framer Motion animatsiyalar
+- Tailwind + CSS utility class'lar
+- `useSyncExternalStore` pattern store'lar uchun
+- O'zbek til interfeysi
 
