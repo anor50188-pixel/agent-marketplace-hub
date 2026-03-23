@@ -61,6 +61,7 @@ const Navbar = () => {
           ))}
           {user ? (
             <div className="flex items-center gap-3">
+              <NavDashboardButton />
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-card/50 border border-border/50">
                 <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center text-[10px] font-bold text-primary">
                   {user.email?.charAt(0).toUpperCase()}
