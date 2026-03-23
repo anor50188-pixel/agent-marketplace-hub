@@ -46,6 +46,8 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
   const t = i18nStore.t;
   const planConfig = PLANS.find((p) => p.id === currentPlan)!;
   const { user } = useAuth();
+  const { isAdmin } = useIsAdmin();
+  const navigate = useNavigate();
 
   const userInitial = user?.email?.charAt(0).toUpperCase() || "U";
   const userEmail = user?.email || "user@example.com";
