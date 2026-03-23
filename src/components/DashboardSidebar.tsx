@@ -148,6 +148,19 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
         ))}
       </nav>
 
+      {/* Admin link */}
+      {isAdmin && (
+        <div className="px-3 pb-1">
+          <button
+            onClick={() => navigate("/admin")}
+            className="w-full flex items-center gap-2 px-2 py-2 rounded-lg text-xs font-medium text-destructive hover:bg-destructive/10 transition-colors"
+          >
+            <Shield className="w-4 h-4" />
+            Admin Panel
+          </button>
+        </div>
+      )}
+
       {/* Footer */}
       <div className="p-3 border-t border-sidebar-border">
         <button
