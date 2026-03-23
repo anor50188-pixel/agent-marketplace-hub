@@ -122,6 +122,7 @@ const HeroSection = ({ onStartClick }: HeroSectionProps) => {
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              onClick={() => onStartClick?.()}
               className="px-8 py-4 rounded-2xl text-base font-semibold text-foreground inline-flex items-center justify-center gap-2 border border-border bg-card/50 hover:bg-card hover:border-primary/30 transition-all backdrop-blur-sm"
             >
               Marketplace ko'rish

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Bell, Search, ChevronRight } from "lucide-react";
+import { Bell, Search, ChevronRight, Menu } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSyncExternalStore } from "react";
 import { i18nStore } from "@/lib/i18nStore";
@@ -18,9 +18,11 @@ const sectionLabels: Record<string, string> = {
 
 interface DashboardTopBarProps {
   activeSection: string;
+  onMenuClick?: () => void;
+  showMenuButton?: boolean;
 }
 
-const DashboardTopBar = ({ activeSection }: DashboardTopBarProps) => {
+const DashboardTopBar = ({ activeSection, onMenuClick, showMenuButton }: DashboardTopBarProps) => {
   const { user } = useAuth();
   useSyncExternalStore(i18nStore.subscribe, i18nStore.getSnapshot);
 
@@ -31,18 +33,26 @@ const DashboardTopBar = ({ activeSection }: DashboardTopBarProps) => {
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: 0.3 }}
-      className="h-12 px-6 flex items-center justify-between dashboard-topbar shrink-0"
+      className="h-12 px-4 md:px-6 flex items-center justify-between dashboard-topbar shrink-0"
     >
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-1.5 text-sm">
-        <span className="text-muted-foreground font-medium">Dashboard</span>
-        <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/40" />
+      {/* Left */}
+      <div className="flex items-center gap-2 text-sm">
+        {showMenuButton && (
+          <button
+            onClick={onMenuClick}
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors mr-1"
+          >
+            <Menu className="w-4 h-4" />
+          </button>
+        )}
+        <span className="text-muted-foreground font-medium hidden sm:inline">Dashboard</span>
+        <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/40 hidden sm:inline" />
         <span className="text-foreground font-semibold">
           {sectionLabels[activeSection] || activeSection}
         </span>
       </div>
 
-      {/* Right side */}
+      {/* Right */}
       <div className="flex items-center gap-2">
         <button className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors">
           <Search className="w-4 h-4" />
