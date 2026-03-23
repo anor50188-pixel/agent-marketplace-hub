@@ -1,9 +1,11 @@
 import { useSyncExternalStore } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown, Store, Crown, Sparkles } from "lucide-react";
+import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown, Store, Crown, Sparkles, Shield } from "lucide-react";
 import { subscriptionStore, PLANS } from "@/lib/subscriptionStore";
 import { i18nStore } from "@/lib/i18nStore";
 import { useAuth } from "@/contexts/AuthContext";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 
 const menuGroups = [
   {
