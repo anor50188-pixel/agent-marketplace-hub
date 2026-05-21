@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, Mail, Lock, User, ArrowRight, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, Eye, EyeOff } from "lucide-react";
+import agentusLogo from "@/assets/agentus-logo.png";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
@@ -91,12 +92,7 @@ const Auth = () => {
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2.5 mb-4">
-            <div className="w-10 h-10 rounded-xl gradient-btn flex items-center justify-center">
-              <Bot className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="font-display text-2xl font-bold text-foreground">Agentus</span>
-          </div>
+          <img src={agentusLogo} alt="Agentus" className="h-10 w-auto mx-auto mb-4" />
           <p className="text-muted-foreground text-sm">
             {mode === "login" ? "Hisobingizga kiring" : "Yangi hisob yarating"}
           </p>
