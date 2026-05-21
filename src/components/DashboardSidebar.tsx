@@ -2,6 +2,7 @@ import { useSyncExternalStore } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Bot, ShoppingBag, LayoutGrid, Plus, X, Settings, FileText, BarChart3, ChevronDown, Store, Crown, Sparkles, Shield } from "lucide-react";
+import agentusLogo from "@/assets/agentus-logo.png";
 import { subscriptionStore, PLANS } from "@/lib/subscriptionStore";
 import { i18nStore } from "@/lib/i18nStore";
 import { useAuth } from "@/contexts/AuthContext";
@@ -61,14 +62,9 @@ const DashboardSidebar = ({ activeSection, onSectionChange, onClose }: Dashboard
     >
       {/* Header */}
       <div className="h-14 px-4 flex items-center justify-between border-b border-sidebar-border">
-        <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg gradient-btn flex items-center justify-center">
-            <Bot className="w-3.5 h-3.5 text-primary-foreground" />
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="font-display font-semibold text-sm text-sidebar-foreground">Agentus</span>
-            <ChevronDown className="w-3.5 h-3.5 text-sidebar-foreground/40" />
-          </div>
+        <div className="flex items-center gap-1.5">
+          <img src={agentusLogo} alt="Agentus" className="h-6 w-auto" />
+          <ChevronDown className="w-3.5 h-3.5 text-sidebar-foreground/40" />
         </div>
         <button
           onClick={onClose}

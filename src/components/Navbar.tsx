@@ -1,8 +1,9 @@
-import { Bot, Menu, LogOut, X } from "lucide-react";
+import { Menu, LogOut, X } from "lucide-react";
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
+import agentusLogo from "@/assets/agentus-logo.png";
 
 const navLinks = [
   { href: "#marketplace", label: "Marketplace" },
@@ -39,14 +40,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/30 bg-background/60 backdrop-blur-2xl">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl gradient-btn flex items-center justify-center shadow-md">
-            <Bot className="w-5 h-5" />
-          </div>
-          <span className="font-display text-xl font-bold tracking-tight text-foreground">
-            Agentus
-          </span>
-        </div>
+        <button onClick={() => navigate("/")} className="flex items-center">
+          <img src={agentusLogo} alt="Agentus" className="h-8 w-auto" />
+        </button>
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
