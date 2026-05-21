@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Sparkles, ArrowRight, Zap, Bot, Brain, Code, MessageSquare } from "lucide-react";
+import agentusLogo from "@/assets/agentus-logo.png";
 
 const phrases = [
   "Nima xohlayapsiz?",
