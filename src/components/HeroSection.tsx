@@ -90,8 +90,7 @@ const HeroSection = ({ onStartClick }: HeroSectionProps) => {
             <img
               src="/agentus-logo.png"
               alt="Agentus"
-              className="h-32 sm:h-40 md:h-52 lg:h-64 w-auto mx-auto"
-              style={{ filter: "brightness(0) invert(1) drop-shadow(0 0 40px hsl(250 85% 65% / 0.5))" }}
+              className="h-32 sm:h-40 md:h-52 lg:h-64 w-auto mx-auto bg-white/10 rounded-lg p-4"
             />
           </div>
 
