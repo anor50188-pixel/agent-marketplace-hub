@@ -86,18 +86,14 @@ const HeroSection = ({ onStartClick }: HeroSectionProps) => {
             <span className="text-xs font-medium text-muted-foreground">AI Agent Platformasi</span>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.7 }}
-            className="mb-6"
-          >
+          <div className="mb-6">
             <img
               src="/agentus-logo.png"
               alt="Agentus"
-              className="h-32 sm:h-40 md:h-52 lg:h-64 w-auto mx-auto brightness-0 invert drop-shadow-[0_0_50px_hsl(250_85%_65%_/_0.45)]"
+              className="h-32 sm:h-40 md:h-52 lg:h-64 w-auto mx-auto"
+              style={{ filter: "brightness(0) invert(1) drop-shadow(0 0 40px hsl(250 85% 65% / 0.5))" }}
             />
-          </motion.div>
+          </div>
 
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight mb-6">
             <span className="text-foreground">O'z </span>
