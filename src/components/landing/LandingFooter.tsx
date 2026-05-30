@@ -1,4 +1,4 @@
-import agentusLogo from "@/assets/agentus-logo.png";
+import agentusLogo from "@/assets/agentus-logo-white.png";
 
 const footerLinks = [
   { label: "Marketplace", href: "#marketplace" },
