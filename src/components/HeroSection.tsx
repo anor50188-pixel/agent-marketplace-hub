@@ -93,9 +93,9 @@ const HeroSection = ({ onStartClick }: HeroSectionProps) => {
             className="mb-6"
           >
             <img
-              src="/agentus-logo.png"
+              src="/agentus-logo-white.png"
               alt="Agentus"
-              className="h-32 sm:h-40 md:h-52 lg:h-64 w-auto mx-auto mix-blend-screen drop-shadow-[0_0_50px_hsl(250_85%_65%_/_0.5)]"
+              className="h-32 sm:h-40 md:h-52 lg:h-64 w-auto mx-auto drop-shadow-[0_0_50px_hsl(250_85%_65%_/_0.5)]"
             />
           </motion.div>
 
